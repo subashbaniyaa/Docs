@@ -48,7 +48,17 @@
       display: flex;
       flex-direction: column;
       transition: background-color 0.3s, color 0.3s;
+      user-select: none; /* Disable text selection */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    * {
       user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
     }
 
     a { color:#72a7ff; text-decoration:none; }
@@ -68,7 +78,7 @@
       margin-bottom: 26px;
     }
     .avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
     .brand {
       font-size: 18px;
       font-weight: 600;
@@ -126,12 +136,12 @@
       justify-content: center;
       color: var(--muted);
       font-weight: 600;
+      pointer-events: none; /* Disable clicks */
     }
     .day.is-empty { visibility: hidden; }
     .day.is-active { background: var(--pill-active); color: #0d0e10; }
     body.light .day.is-active { background:#222; color:#eee; }
     .day.is-selectable { background:#1d2026; color:#d5d6db; }
-    body.light .day.is-selectable { background:#f4f4f4; color:#666; }
 
     #modeToggle {
       position: fixed !important;
@@ -161,7 +171,6 @@
       transform: translateX(20px);
     }
 
-
     .copy-btn { 
       background: none;
       border: none;
@@ -171,25 +180,22 @@
       margin-left: 0.5rem;
       border-radius: 4px;
       transition: var(--transition);
+      pointer-events: none; /* Disable clicking */
     }
-    .copy-btn:hover { background-color: rgba(99, 102, 241, 0.1); }
 
     .sakuna-image {
       display: flex;
       justify-content: center;
       margin: 15px 0;
+      user-select: none;
     }
-
     .sakuna-image img {
-      width: 150px;      /* set a fixed width */
-      height: auto;       /* maintain aspect ratio */
-      transition: transform 0.3s ease; /* for animation */
+      width: 150px;
+      height: auto;
+      transition: transform 0.3s ease;
+      user-select: none;
+      pointer-events: none;
     }
-
-    .sakuna-image img:hover {
-      transform: scale(1.1); /* slightly enlarge on hover */
-    }
-
 
     .copyright {
       text-align: center;
