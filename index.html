@@ -179,7 +179,17 @@
       justify-content: center;
       margin: 15px 0;
     }
-    .sakuna-image img { max-width: 100px; height: auto; }
+
+    .sakuna-image img {
+      width: 150px;      /* set a fixed width */
+      height: auto;       /* maintain aspect ratio */
+      transition: transform 0.3s ease; /* for animation */
+    }
+
+    .sakuna-image img:hover {
+      transform: scale(1.1); /* slightly enlarge on hover */
+    }
+
 
     .copyright {
       text-align: center;
@@ -199,7 +209,7 @@
   <div class="wrap">
     <!-- Header -->
     <div class="header">
-      <div class="avatar"><img src="assets/eren.jpeg" alt="Profile" /></div>
+      <div class="avatar"><img src="assets/berserg.gif" alt="Profile" /></div>
       <div class="brand">Subash</div>
     </div>
 
@@ -222,7 +232,7 @@
     <br>
     <!-- Image -->
     <div class="sakuna-image">
-      <img src="assets/one.png" alt="OnePiece" />
+      <img src="assets/goku.gif" alt="Gif" />
     </div>
 
     <br>
