@@ -120,17 +120,6 @@
       transform: translateX(20px);
     }
 
-    .copy-btn { 
-      background: none;
-      border: none;
-      color: #72a7ff;
-      cursor: pointer;
-      font-size: 0.85rem;
-      margin-left: 0.5rem;
-      border-radius: 4px;
-      transition: var(--transition);
-    }
-
     .sakuna-image {
       display: flex;
       justify-content: center;
@@ -180,8 +169,7 @@
       <p>+977 9876543210</p>
       <p>
         <span id="email">hello@subashbaniya.info.np</span>
-        <button class="copy-btn" onclick="copyEmail()">Copy</button>
-      </p>
+        </p>
     </div>
 
     <br>
@@ -235,23 +223,6 @@
       }
     }
     replaceCardContent();
-
-    // Copy email
-    function copyEmail() {
-      const emailText = document.getElementById("email").textContent;
-      const btn = document.querySelector(".copy-btn");
-      navigator.clipboard.writeText(emailText)
-        .then(() => {
-          const originalColor = btn.style.color;
-          btn.textContent = "Copied!";
-          btn.style.color = "green";
-          setTimeout(() => { 
-            btn.textContent = "Copy"; 
-            btn.style.color = originalColor || "#72a7ff";
-          }, 2000);
-        })
-        .catch(() => alert("Failed to copy email."));
-    }
   </script>
 </body>
 </html>
