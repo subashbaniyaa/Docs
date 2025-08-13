@@ -16,7 +16,6 @@
       --panel: #111215;
       --text: #e9e9ec;
       --muted: #b7b8bf;
-      --muted-2: #8b8c93;
       --accent: #ffffff;
       --card: #17181c;
       --border: #24262c;
@@ -31,7 +30,6 @@
       --panel: #f9f9f9;
       --text: #1a1a1a;
       --muted: #777;
-      --muted-2: #999;
       --accent: #222;
       --card: #fff;
       --border: #ddd;
@@ -40,26 +38,16 @@
     }
 
     html, body {
-      scroll-behavior: smooth;
-      min-height: 100vh;
       margin: 0;
       font-family: "Poppins", sans-serif;
       background: var(--bg);
       color: var(--text);
+      height: 100vh;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       transition: background-color 0.3s, color 0.3s;
       user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-    }
-
-    * {
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
     }
 
     a { color:#72a7ff; text-decoration:none; }
@@ -70,6 +58,8 @@
       margin: 0 auto;
       padding: 28px 20px;
       flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .header {
@@ -80,7 +70,7 @@
     }
 
     .avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
     .brand {
       font-size: 18px;
@@ -89,13 +79,10 @@
       opacity: 0.9;
     }
 
-    /* Remove card styling for general content */
     .card {
       background: transparent;
       border: none;
-      border-radius: 0;
       padding: 0;
-      box-shadow: none;
       margin-bottom: 0;
     }
 
@@ -105,51 +92,8 @@
     .api-docs { margin-top: 16px; color: var(--muted); font-size: 15px; line-height: 1.5; }
     .api-docs a { font-weight: 600; margin-right: 12px; }
 
-    .cal-title { font-size: 20px; margin-bottom: 6px; }
-
-    /* Keep calendar styling intact */
-    .calendar {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-    }
-
-    .dow {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      margin-bottom: 8px;
-      color: var(--muted-2);
-      font-size: 12px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-    }
-
-    .day {
-      aspect-ratio: 1/1;
-      border-radius: 14px;
-      background: #15161b;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-weight: 600;
-      pointer-events: none;
-    }
-
-    .day.is-empty { visibility: hidden; }
-    .day.is-active { background: var(--pill-active); color: #0d0e10; }
-    body.light .day.is-active { background:#222; color:#eee; }
-    .day.is-selectable { background:#1d2026; color:#d5d6db; }
-
     #modeToggle {
-      position: fixed !important;
+      position: fixed;
       top: 20px;
       right: 20px;
       width: 46px;
@@ -185,30 +129,34 @@
       margin-left: 0.5rem;
       border-radius: 4px;
       transition: var(--transition);
-      pointer-events: none;
     }
 
     .sakuna-image {
       display: flex;
       justify-content: center;
-      margin: 15px 0;
-      user-select: none;
+      flex: 1;
+      align-items: center;
     }
 
     .sakuna-image img {
       width: 150px;
       height: auto;
       transition: transform 0.3s ease;
-      user-select: none;
-      pointer-events: none;
     }
 
     .copyright {
       text-align: center;
       padding: 12px 20px;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--muted);
-      background: var(--bg);
+    }
+    .avatar img,
+    .sakuna-image img {
+      user-select: none;
+      -webkit-user-drag: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      pointer-events: none;
     }
 
   </style>
@@ -247,22 +195,9 @@
     <div class="sakuna-image">
       <img src="assets/goku.gif" alt="Gif" />
     </div>
-
-    <br>
-    <!-- Calendar -->
-    <div class="cal-wrap">
-      <div class="cal-title" id="monthTitle"></div>
-      <div class="calendar">
-        <div class="dow">
-          <div>Sun</div><div>Mon</div><div>Tue</div>
-          <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-        </div>
-        <div class="grid" id="calendarGrid"></div>
-      </div>
-    </div>
+    
+    <div class="copyright">subashbaniyaa</div>
   </div>
-
-  <div class="copyright">subashbaniyaa</div>
 
   <script>
     // Theme toggle
@@ -278,27 +213,6 @@
         body.classList.contains('light') ? 'light' : 'dark'
       );
     });
-
-    // Calendar
-    function generateCalendar() {
-      const now = new Date();
-      const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-      document.getElementById("monthTitle").textContent = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
-      const firstDay = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
-      const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-      const grid = document.getElementById("calendarGrid");
-      grid.innerHTML = "";
-      for (let i = 0; i < firstDay; i++) {
-        grid.appendChild(Object.assign(document.createElement("div"), { className: "day is-empty" }));
-      }
-      for (let d = 1; d <= daysInMonth; d++) {
-        const day = document.createElement("div");
-        day.className = (d === now.getDate()) ? "day is-active" : "day is-selectable";
-        day.textContent = d;
-        grid.appendChild(day);
-      }
-    }
-    generateCalendar();
 
     // API content
     async function replaceCardContent() {
@@ -325,12 +239,16 @@
     // Copy email
     function copyEmail() {
       const emailText = document.getElementById("email").textContent;
+      const btn = document.querySelector(".copy-btn");
       navigator.clipboard.writeText(emailText)
         .then(() => {
-          const btn = document.querySelector(".copy-btn");
-          const originalText = btn.textContent;
+          const originalColor = btn.style.color;
           btn.textContent = "Copied!";
-          setTimeout(() => { btn.textContent = originalText; }, 2000);
+          btn.style.color = "green";
+          setTimeout(() => { 
+            btn.textContent = "Copy"; 
+            btn.style.color = originalColor || "#72a7ff";
+          }, 2000);
         })
         .catch(() => alert("Failed to copy email."));
     }
