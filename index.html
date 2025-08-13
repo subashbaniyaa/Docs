@@ -134,26 +134,33 @@
     body.light .day.is-selectable { background:#f4f4f4; color:#666; }
 
     #modeToggle {
-      position: fixed;
-      top: 20px; right: 20px;
+      position: fixed !important;
+      top: 20px;
+      right: 20px;
+      width: 46px;
+      height: 26px;
+      border-radius: 20px;
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      width: 46px; height: 26px;
-      cursor: pointer;
       display: flex;
       align-items: center;
       padding: 2px;
-      box-shadow: var(--shadow);
-      z-index: 1000;
+      cursor: pointer;
+      z-index: 9999;
     }
+
     #modeToggle .toggle-circle {
       background: var(--accent);
       border-radius: 50%;
-      width: 22px; height: 22px;
+      width: 22px;
+      height: 22px;
       transition: transform 0.3s;
     }
-    body.light #modeToggle .toggle-circle { transform: translateX(20px); }
+
+    body.light #modeToggle .toggle-circle {
+      transform: translateX(20px);
+    }
+
 
     .copy-btn { 
       background: none;
@@ -237,9 +244,13 @@
     const body = document.body;
     const savedMode = localStorage.getItem('themeMode');
     if (savedMode === 'light') body.classList.add('light');
+
     modeToggle.addEventListener('click', () => {
       body.classList.toggle('light');
-      localStorage.setItem('themeMode', body.classList.contains('light') ? 'light' : 'dark');
+      localStorage.setItem(
+        'themeMode',
+        body.classList.contains('light') ? 'light' : 'dark'
+      );
     });
 
     // Calendar
