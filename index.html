@@ -25,6 +25,7 @@
       --radius: 18px;
       --transition: all 0.3s ease;
     }
+
     body.light {
       --bg: #fff;
       --panel: #f9f9f9;
@@ -48,7 +49,7 @@
       display: flex;
       flex-direction: column;
       transition: background-color 0.3s, color 0.3s;
-      user-select: none; /* Disable text selection */
+      user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
@@ -77,8 +78,10 @@
       gap: 14px;
       margin-bottom: 26px;
     }
+
     .avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; }
     .avatar img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+
     .brand {
       font-size: 18px;
       font-weight: 600;
@@ -86,18 +89,14 @@
       opacity: 0.9;
     }
 
+    /* Remove card styling for general content */
     .card {
-      background: linear-gradient(180deg, var(--card), #121318);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
-    }
-    body.light .card {
-      background: var(--card);
-      color: var(--text);
-      border-color: var(--border);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      margin-bottom: 0;
     }
 
     h1 { font-size: 25px; margin: 0 0 16px; }
@@ -107,12 +106,15 @@
     .api-docs a { font-weight: 600; margin-right: 12px; }
 
     .cal-title { font-size: 20px; margin-bottom: 6px; }
+
+    /* Keep calendar styling intact */
     .calendar {
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 16px;
     }
+
     .dow {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -121,11 +123,13 @@
       color: var(--muted-2);
       font-size: 12px;
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 10px;
     }
+
     .day {
       aspect-ratio: 1/1;
       border-radius: 14px;
@@ -136,8 +140,9 @@
       justify-content: center;
       color: var(--muted);
       font-weight: 600;
-      pointer-events: none; /* Disable clicks */
+      pointer-events: none;
     }
+
     .day.is-empty { visibility: hidden; }
     .day.is-active { background: var(--pill-active); color: #0d0e10; }
     body.light .day.is-active { background:#222; color:#eee; }
@@ -180,7 +185,7 @@
       margin-left: 0.5rem;
       border-radius: 4px;
       transition: var(--transition);
-      pointer-events: none; /* Disable clicking */
+      pointer-events: none;
     }
 
     .sakuna-image {
@@ -189,6 +194,7 @@
       margin: 15px 0;
       user-select: none;
     }
+
     .sakuna-image img {
       width: 150px;
       height: auto;
@@ -204,6 +210,7 @@
       color: var(--muted);
       background: var(--bg);
     }
+
   </style>
 </head>
 
