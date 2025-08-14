@@ -54,39 +54,10 @@
                   font-weight: 600;
                   margin-right: 12px;
                   color: #007bff;
-                  text-decoration: none;
+                  text-decoration: underline;
                   position: relative;
                   display: inline-block;
                   transition: transform 0.1s ease;
-                }
-
-                .api-docs a::after {
-                  content: '';
-                  position: absolute;
-                  width: 100%;
-                  height: 2px;
-                  background-color: #007bff;
-                  left: 0;
-                  bottom: -2px;
-                  transform: scaleX(0);
-                  transform-origin: right;
-                  transition: transform 0.3s ease;
-                }
-
-                .api-docs a:hover::after {
-                  transform: scaleX(1);
-                  transform-origin: left;
-                }
-
-                .api-docs a:active {
-                  animation: clickBounce 0.25s forwards;
-                }
-
-                @keyframes clickBounce {
-                  0% { transform: scale(1); }
-                  30% { transform: scale(0.85); }
-                  60% { transform: scale(1.05); }
-                  100% { transform: scale(1); }
                 }
 
                 .wrap {
