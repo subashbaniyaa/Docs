@@ -42,7 +42,7 @@
         background: var(--bg);
         color: var(--text);
         height: 100vh;
-        overflow: hidden;
+        overflow: auto;
         display: flex;
         flex-direction: column;
         user-select: none;
@@ -117,13 +117,12 @@
         border: none;
         padding: 0;
         margin-bottom: 0;
-        text-align: left; /* prevent centering on short text */
       }
 
       h1 {
         font-size: 22px;
         margin: 0 0 16px;
-        text-align: left; /* force left align for quotes */
+        text-align: left;
       }
 
       .sub {
@@ -131,10 +130,10 @@
         font-size: 15px;
         margin-bottom: 12px;
         color: var(--accent);
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: 8px;
-        justify-content: flex-start;
+        gap: 6px;
+        flex-wrap: wrap;
       }
 
       .sakuna-image {
@@ -157,7 +156,6 @@
         pointer-events: none;
       }
 
-      /* Refresh animation */
       @keyframes spin {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
@@ -165,13 +163,6 @@
 
       .spin {
         animation: spin 0.6s linear;
-      }
-
-      #refreshIcon {
-        cursor: pointer;
-        color: #007bff;
-        font-size: 16px;
-        margin-left: 6px;
       }
     </style>
   </head>
@@ -216,14 +207,11 @@
           <h1>Loading...</h1>
         </div>
       </div>
-
-      <!-- API Link -->
-      <p style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 14px; color: var(--text);"></i>
+      <p style="margin-top: 10px;">
+        <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
         <a href="/api" style="color: #007bff; text-decoration: underline;">View Docs</a>
       </p>
     </div>
-
     <script>
       async function replaceCardContent() {
         try {
@@ -236,20 +224,18 @@
             html += `
               <h1>${quoteObj.quote}</h1>
               <div class="sub">
-                — ${quoteObj.character}, ${quoteObj.anime}
-                <i class="fa-solid fa-repeat" id="refreshIcon" title="Refresh Quote"></i>
+                <span>— ${quoteObj.character}, ${quoteObj.anime}</span>
+                <i class="fa-solid fa-repeat" id="refreshIcon" title="Refresh Quote" style="color: #007bff; cursor: pointer;"></i>
               </div>`;
           }
           document.getElementById("cardContent").innerHTML = html;
-
           const refreshIcon = document.getElementById("refreshIcon");
-          if (refreshIcon) {
-            refreshIcon.addEventListener("click", async () => {
-              refreshIcon.classList.add("spin");
-              await replaceCardContent();
-              refreshIcon.classList.remove("spin");
+          refreshIcon.addEventListener("click", () => {
+            refreshIcon.classList.add("spin");
+            replaceCardContent().finally(() => {
+              setTimeout(() => refreshIcon.classList.remove("spin"), 600);
             });
-          }
+          });
         } catch {
           document.getElementById("cardContent").innerHTML = "<h1>Failed to load content.</h1>";
         }
