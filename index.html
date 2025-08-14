@@ -1,367 +1,301 @@
-<!doctype html>
-<html lang="en-US">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Subash</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Docs" />
-    <meta name="author" content="Subash Baniya" />
-    <link rel="icon" href="https://i.imgur.com/9GGNGm1.jpeg" type="image/png" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400&display=swap" rel="stylesheet" />
+          <!doctype html>
+          <html lang="en-US">
+            <head>
+              <meta charset="UTF-8" />
+              <title>Subash</title>
+              <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+              <meta name="theme-color" content="#000000" />
+              <meta name="description" content="Docs" />
+              <meta name="author" content="Subash Baniya" />
+              <link rel="icon" href="https://i.imgur.com/9GGNGm1.jpeg" type="image/png" />
+              <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400&display=swap" rel="stylesheet" />
 
-    <style>
-      :root {
-        --bg: #0f0f10;
-        --panel: #111215;
-        --text: #e9e9ec;
-        --muted: #b7b8bf;
-        --accent: #ffffff;
-        --card: #17181c;
-        --border: #24262c;
-        --pill-active: #eaeaea;
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        --radius: 18px;
-        --transition: all 0.3s ease;
-      }
+              <style>
+                :root {
+                  --bg: #0f0f10;
+                  --panel: #111215;
+                  --text: #e9e9ec;
+                  --muted: #b7b8bf;
+                  --accent: #ffffff;
+                  --card: #17181c;
+                  --border: #24262c;
+                  --pill-active: #eaeaea;
+                  --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                  --radius: 18px;
+                  --transition: all 0.3s ease;
+                }
 
-      body.light {
-        --bg: #fff;
-        --panel: #f9f9f9;
-        --text: #1a1a1a;
-        --muted: #777;
-        --accent: #222;
-        --card: #fff;
-        --border: #ddd;
-        --pill-active: #222;
-        --shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      }
+                body.light {
+                  --bg: #fff;
+                  --panel: #f9f9f9;
+                  --text: #1a1a1a;
+                  --muted: #777;
+                  --accent: #222;
+                  --card: #fff;
+                  --border: #ddd;
+                  --pill-active: #222;
+                  --shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+                }
 
-      html, body {
-        margin: 0;
-        font-family: "Poppins", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        height: 100vh;
-        overflow: auto;
-        display: flex;
-        flex-direction: column;
-        transition: background-color 0.3s, color 0.3s;
-        user-select: none;
-      }
+                html, body {
+                  margin: 0;
+                  font-family: "Poppins", sans-serif;
+                  background: var(--bg);
+                  color: var(--text);
+                  height: 100vh;
+                  overflow: auto;
+                  display: flex;
+                  flex-direction: column;
+                  transition: background-color 0.3s, color 0.3s;
+                  user-select: none;
+                }
 
-      .api-docs a {
-        font-weight: 600;
-        margin-right: 12px;
-        color: #007bff;
-        text-decoration: none;
-        position: relative;
-        display: inline-block;
-        transition: transform 0.1s ease; /* initial quick scale */
-      }
+                .api-docs a {
+                  font-weight: 600;
+                  margin-right: 12px;
+                  color: #007bff;
+                  text-decoration: none;
+                  position: relative;
+                  display: inline-block;
+                  transition: transform 0.1s ease;
+                }
 
-      .api-docs a::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background-color: #007bff;
-        left: 0;
-        bottom: -2px;
-        transform: scaleX(0);
-        transform-origin: right;
-        transition: transform 0.3s ease;
-      }
+                .api-docs a::after {
+                  content: '';
+                  position: absolute;
+                  width: 100%;
+                  height: 2px;
+                  background-color: #007bff;
+                  left: 0;
+                  bottom: -2px;
+                  transform: scaleX(0);
+                  transform-origin: right;
+                  transition: transform 0.3s ease;
+                }
 
-      .api-docs a:hover::after {
-        transform: scaleX(1);
-        transform-origin: left;
-      }
+                .api-docs a:hover::after {
+                  transform: scaleX(1);
+                  transform-origin: left;
+                }
 
-      /* Two-step click animation */
-      .api-docs a:active {
-        animation: clickBounce 0.25s forwards;
-      }
+                .api-docs a:active {
+                  animation: clickBounce 0.25s forwards;
+                }
 
-      @keyframes clickBounce {
-        0% {
-          transform: scale(1);
-        }
-        30% {
-          transform: scale(0.85); /* shrink */
-        }
-        60% {
-          transform: scale(1.05); /* overshoot */
-        }
-        100% {
-          transform: scale(1); /* back to normal */
-        }
-      }
+                @keyframes clickBounce {
+                  0% { transform: scale(1); }
+                  30% { transform: scale(0.85); }
+                  60% { transform: scale(1.05); }
+                  100% { transform: scale(1); }
+                }
 
+                .wrap {
+                  max-width: 760px;
+                  margin: 0 auto;
+                  padding: 28px 20px;
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                }
 
-      .wrap {
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 28px 20px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
+                .header {
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  margin-bottom: 20px;
+                }
 
-      /* Header */
-      .header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 20px;
-      }
+                .avatar {
+                  width: 45px;
+                  height: 45px;
+                  border-radius: 50%;
+                  overflow: hidden;
+                  flex-shrink: 0;
+                }
 
-      .avatar {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
+                .avatar img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  transition: transform 0.3s ease;
+                }
 
-      .avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-      }
+                .avatar:hover img {
+                  transform: scale(1.05);
+                }
 
-      .avatar:hover img {
-        transform: scale(1.05);
-      }
+                .brand {
+                  font-size: 18px;
+                  font-weight: 600;
+                  color: var(--text);
+                  display: flex;
+                  align-items: center;
+                  gap: 6px;
+                }
 
-      .brand {
-        font-size: 18px;
-        font-weight: 600;
-        color: var(--text);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
+                /* Updated badge size */
+                .verified-badge {
+                  display: inline-flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 20px;
+                  height: 20px;
+                }
 
-      /* Blue verified badge */
-      .verified-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #1da1f2;
-        border-radius: 50%;
-        width: 16px;
-        height: 16px;
-      }
+                .verified-badge svg {
+                  width: 100%;
+                  height: 100%;
+                  vertical-align: middle;
+                }
 
-      .verified-badge svg {
-        width: 10px;
-        height: 10px;
-        fill: white;
-      }
+                .card {
+                  background: transparent;
+                  border: none;
+                  padding: 0;
+                  margin-bottom: 0;
+                }
 
-      .card {
-        background: transparent;
-        border: none;
-        padding: 0;
-        margin-bottom: 0;
-      }
+                h1 {
+                  font-size: 22px;
+                  margin: 0 0 16px;
+                }
+                .sub {
+                  font-weight: 700;
+                  font-size: 15px;
+                  margin-bottom: 12px;
+                  color: var(--accent);
+                }
 
-      h1 {
-        font-size: 22px;
-        margin: 0 0 16px;
-      }
-      .sub {
-        font-weight: 700;
-        font-size: 15px;
-        margin-bottom: 12px;
-        color: var(--accent);
-      }
+                .api-docs {
+                  margin-top: 16px;
+                  color: #007bff;
+                  font-size: 15px;
+                  line-height: 1.5;
+                }
 
-      .api-docs {
-        margin-top: 16px;
-        color: #007bff;
-        font-size: 15px;
-        line-height: 1.5;
-      }
-      .api-docs a {
-        font-weight: 600;
-        margin-right: 12px;
-        color: #007bff;
-      }
+                #modeToggle {
+                  position: fixed;
+                  top: 20px;
+                  right: 20px;
+                  background: transparent;
+                  border: none;
+                  font-size: 1.3rem;
+                  cursor: pointer;
+                  z-index: 9999;
+                  padding: 5px;
+                  transition: transform 0.2s ease;
+                  outline: none;
+                }
 
-      /* Emoji toggle */
-      #modeToggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: transparent;
-        border: none;
-        font-size: 1.3rem;
-        cursor: pointer;
-        z-index: 9999;
-        padding: 5px;
-        transition: transform 0.2s ease;
-        outline: none;
-      }
+                #modeToggle:focus { outline: none; }
+                #modeToggle:active { transform: scale(0.85); }
 
-      #modeToggle:focus {
-        outline: none;
-      }
+                .sakuna-image {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  margin: 20px 0;
+                }
 
-      #modeToggle:active {
-        transform: scale(0.85);
-      }
+                .sakuna-image img {
+                  width: 150px;
+                  height: auto;
+                  transition: transform 0.3s ease;
+                }
 
-      .sakuna-image {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 20px 0;
-      }
+                .avatar img,
+                .sakuna-image img {
+                  user-select: none;
+                  -webkit-user-drag: none;
+                  pointer-events: none;
+                }
 
-      .sakuna-image img {
-        width: 150px;
-        height: auto;
-        transition: transform 0.3s ease;
-      }
+                .gmail-link {
+                  color: #007bff;
+                  font-weight: 500;
+                  text-decoration: underline;
+                }
+              </style>
+            </head>
 
-      .avatar img,
-      .sakuna-image img {
-        user-select: none;
-        -webkit-user-drag: none;
-        pointer-events: none;
-      }
+            <body>
+              <button id="modeToggle" aria-label="Toggle light/dark mode">🌝</button>
 
-      #dateTime {
-        position: fixed;
-        bottom: 15px;
-        right: 15px;
-        font-size: 1rem;
-        font-weight: 700;
-        z-index: 999;
-        text-align: right;
-        line-height: 1.4;
-        color: white;
-        font-family: "Roboto", sans-serif;
-      }
+              <div class="wrap">
+                <div class="header">
+                  <div class="avatar">
+                    <img src="assets/eren.jpeg" alt="Profile" />
+                  </div>
+                  <div class="brand">
+                    subashbaniyaa
+                    <span class="verified-badge">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                        <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon>
+                        <polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
 
-      body.light #dateTime {
-        color: black;
-      }
+                <div class="card">
+                  <p>Web Developer from Nepal — crafting minimal, user-first web experiences.</p>
+                  <p>+977 9876543210</p>
+                  <p>
+                    <a class="gmail-link" href="mailto:hello@subashbaniya.info.np">hello@subashbaniya.info.np</a>
+                  </p>
+                </div>
 
-      .gmail-link {
-        color: #007bff;
-        font-weight: 500;
-        text-decoration: underline;
-      }
-    </style>
-  </head>
+                <br>
+                <div class="sakuna-image">
+                  <img src="assets/goku.gif" alt="Sakuna" />
+                </div>
 
-  <body>
-    <!-- Emoji Toggle -->
-    <button id="modeToggle" aria-label="Toggle light/dark mode">🌝</button>
+                <br>
+                <div class="card" id="cardContent">
+                  <h1>Loading...</h1>
+                </div>
+              </div>
 
-    <div class="wrap">
-      <!-- Header -->
-      <div class="header">
-        <div class="avatar">
-          <img src="assets/eren.jpeg" alt="Profile" />
-        </div>
-        <div class="brand">
-          Subash
-          <span class="verified-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M20.285 6.709l-11.025 11.025-5.546-5.546 1.414-1.414 4.132 4.132 9.611-9.611z"/>
-            </svg>
-          </span>
-        </div>
-      </div>
+              <div id="dateTime"></div>
 
-      <!-- Bio -->
-      <div class="card">
-        <p>Web Developer from Nepal — crafting minimal, user-first web experiences.</p>
-        <p>+977 9876543210</p>
-        <p>
-          <a class="gmail-link" href="mailto:hello@subashbaniya.info.np">hello@subashbaniya.info.np</a>
-        </p>
-      </div>
+              <script>
+                const modeToggle = document.getElementById("modeToggle");
+                const body = document.body;
+                const savedMode = localStorage.getItem("themeMode");
+                if (savedMode === "light") {
+                  body.classList.add("light");
+                  modeToggle.textContent = "🌞";
+                }
 
-      <br>
-      <!-- Sakuna Image (moved up) -->
-      <div class="sakuna-image">
-        <img src="assets/goku.gif" alt="Sakuna" />
-      </div>
+                modeToggle.addEventListener("click", () => {
+                  body.classList.toggle("light");
+                  const isLight = body.classList.contains("light");
+                  localStorage.setItem("themeMode", isLight ? "light" : "dark");
+                  modeToggle.textContent = isLight ? "🌞" : "🌝";
+                });
 
-      <br>
-      <!-- API Card -->
-      <div class="card" id="cardContent">
-        <h1>Loading...</h1>
-      </div>
-    </div>
-
-    <!-- Real-time clock -->
-    <div id="dateTime"></div>
-
-    <script>
-      const modeToggle = document.getElementById("modeToggle");
-      const body = document.body;
-      const savedMode = localStorage.getItem("themeMode");
-      if (savedMode === "light") {
-        body.classList.add("light");
-        modeToggle.textContent = "🌞";
-      }
-
-      modeToggle.addEventListener("click", () => {
-        body.classList.toggle("light");
-        const isLight = body.classList.contains("light");
-        localStorage.setItem("themeMode", isLight ? "light" : "dark");
-        modeToggle.textContent = isLight ? "🌞" : "🌝";
-      });
-
-      async function replaceCardContent() {
-        try {
-          const res = await fetch("/api");
-          if (!res.ok) throw new Error("Failed to fetch API");
-          const data = await res.json();
-          const quoteObj = data.find((item) => item.quote);
-          const apiObj = data.find((item) => item.api);
-          let html = "";
-          if (quoteObj)
-            html += `<h1>${quoteObj.quote}</h1><div class="sub">— ${quoteObj.character}, ${quoteObj.anime}</div>`;
-          if (apiObj)
-            html += `<div class="api-docs"><br>
-          <a href="/api/chat?prompt=hi" target="_blank">Chat</a>
-          <a href="/api/imagine?prompt=hi" target="_blank">Imagine</a>
-          <a href="/api/" target="_blank">Docs</a>
-        </div>`;
-          document.getElementById("cardContent").innerHTML = html;
-        } catch {
-          document.getElementById("cardContent").innerHTML = "<h1>Failed to load content.</h1>";
-        }
-      }
-      replaceCardContent();
-
-      function updateClock() {
-        const now = new Date();
-        const dateStr = now.toLocaleDateString("en-US", {
-          timeZone: "Asia/Kathmandu",
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-        });
-        const timeStr = now.toLocaleTimeString("en-US", {
-          timeZone: "Asia/Kathmandu",
-          hour12: true,
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-        });
-        document.getElementById("dateTime").innerHTML = `${timeStr}`;
-      }
-      setInterval(updateClock, 1000);
-      updateClock();
-    </script>
-  </body>
-</html>
+                async function replaceCardContent() {
+                  try {
+                    const res = await fetch("/api");
+                    if (!res.ok) throw new Error("Failed to fetch API");
+                    const data = await res.json();
+                    const quoteObj = data.find((item) => item.quote);
+                    const apiObj = data.find((item) => item.api);
+                    let html = "";
+                    if (quoteObj)
+                      html += `<h1>${quoteObj.quote}</h1><div class="sub">— ${quoteObj.character}, ${quoteObj.anime}</div>`;
+                    if (apiObj)
+                      html += `<div class="api-docs"><br>
+                    <a href="/api/chat?prompt=hi" target="_blank">Chat</a>
+                    <a href="/api/imagine?prompt=hi" target="_blank">Imagine</a>
+                    <a href="/api/" target="_blank">Docs</a>
+                  </div>`;
+                    document.getElementById("cardContent").innerHTML = html;
+                  } catch {
+                    document.getElementById("cardContent").innerHTML = "<h1>Failed to load content.</h1>";
+                  }
+                }
+                replaceCardContent();
+              </script>
+            </body>
+          </html>
