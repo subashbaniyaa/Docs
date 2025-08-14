@@ -169,6 +169,44 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
+
+      /* Collapsible Try API section */
+      .try-api {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        gap: 6px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        user-select: none;
+      }
+
+      .try-api .triangle {
+        transition: transform 0.3s ease;
+      }
+
+      .try-api.open .triangle {
+        transform: rotate(90deg);
+      }
+
+      .try-api-options {
+        max-height: 0;
+        overflow: hidden;
+        margin-left: 26px;
+        margin-bottom: 8px;
+        flex-direction: column;
+        gap: 4px;
+        transition: max-height 0.3s ease;
+      }
+
+      .try-api-options.show {
+        max-height: 100px; /* enough to show 2 links */
+      }
+
+      .try-api-options a {
+        color: #007bff;
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
@@ -211,11 +249,25 @@
         <div class="card" id="cardContent">
           <h1>Loading...</h1>
         </div>
+
+        <br>
+        <!-- Try API Section -->
+        <div class="try-api" id="tryApiToggle">
+          <i class="fa-solid fa-dice"></i> <!-- random icon -->
+          <span>Try API</span>
+          <i class="fa-solid fa-caret-right triangle"></i>
+        </div>
+        <div class="try-api-options" id="tryApiOptions">
+          <a href="/api/chat?prompt=hi" target="_blank">Chat</a> <br>
+          <a href="/api/imagine?prompt=hi" target="_blank">Imagine</a>
+        </div>
+
+        <!-- View Docs -->
+        <p style="margin-top: 10px;">
+          <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
+          <a href="/api" style="color: #007bff; text-decoration: underline;">View Docs</a>
+        </p>
       </div>
-      <p style="margin-top: 10px;">
-        <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
-        <a href="/api" style="color: #007bff; text-decoration: underline;">View Docs</a>
-      </p>
     </div>
 
     <script>
@@ -249,6 +301,21 @@
       }
 
       replaceCardContent();
+
+      // Try API toggle
+      const tryApiToggle = document.getElementById("tryApiToggle");
+      const tryApiOptions = document.getElementById("tryApiOptions");
+
+      tryApiToggle.addEventListener("click", () => {
+        const isOpen = tryApiOptions.classList.contains("show");
+        if (isOpen) {
+          tryApiOptions.style.maxHeight = "0";
+          tryApiOptions.classList.remove("show");
+          tryApiToggle.classList.remove("open");
+        } else {
+          tryApiOptions.style.maxHeight = tryApiOptions.scrollHeight + "px";
+          tryApiOptions.classList.add("show");
+          tryApiToggle.classList.add("open");
+        }
+      });
     </script>
-  </body>
-</html>
