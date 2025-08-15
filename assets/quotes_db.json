@@ -25,11 +25,6 @@
     "anime": "Naruto"
   },
   {
-   "character": "Sherlock Holmes",
-    "quote": "I'm not a hero. I'm a high-functioning sociopath.",
-    "anime": "Gosick"
-  },
-  {
     "character": "Bruce Wayne / Batman",
     "quote": "It's not who I am underneath, but what I do that defines me.",
     "anime": "Batman: Gotham Knight"
@@ -43,11 +38,6 @@
     "character": "Yuzuki Eba",
     "quote": "Even in the darkest times, hope is something that you can hold on to.",
     "anime": "Kimi no Iru Machi"
-  },
-  {
-    "character": "Kino",
-    "quote": "The world is not beautiful, therefore it is.",
-    "anime": "Kino's Journey"
   },
   {
     "character": "Monkey D. Luffy",
@@ -105,11 +95,6 @@
     "anime": "One Punch Man"
   },
   {
-    "character": "Light Yagami",
-    "quote": "I am justice.",
-    "anime": "Death Note"
-  },
-  {
     "character": "Edward Elric",
     "quote": "Humankind cannot gain anything without first giving something in return. To obtain, something of equal value must be lost.",
     "anime": "Fullmetal Alchemist"
@@ -123,16 +108,6 @@
     "character": "Ryuk",
     "quote": "Humans, who are proud of their own free will, are blind to this truth. That they themselves are being manipulated by someone.",
     "anime": "Death Note"
-  },
-{
-    "character": "Sakata Gintoki",
-    "quote": "There's no such thing as a 'forever' war, I guess.",
-    "anime": "Gintama"
-  },
-  {
-    "character": "Riza Hawkeye",
-    "quote": "A lesson without pain is meaningless.",
-    "anime": "Fullmetal Alchemist"
   },
   {
     "character": "Monkey D. Luffy",
@@ -198,11 +173,6 @@
     "character": "Yuji Itadori",
     "quote": "I want to help people as much as I can. That's why I became a Jujutsu sorcerer.",
     "anime": "Jujutsu Kaisen"
-  },
-  {
-    "character": "Eren Yeager",
-    "quote": "I'm free. I'm finally free.",
-    "anime": "Attack on Titan"
   },
 {
     "character": "Retsuko",
@@ -281,11 +251,6 @@
   },
   {
     "character": "Kazehaya Shouta",
-    "quote": "The only true fear is the fear of the unknown.",
-    "anime": "Bleach"
-  },
-  {
-    "character": "Kazehaya Shouta",
     "quote": "I want you to be happy. I want you to laugh a lot. I don’t know what exactly I’ll be able to do for you, but I’ll always be by your side.",
     "anime": "Kimi ni Todoke"
   },
@@ -318,11 +283,6 @@
     "character": "Yuzuki Eba",
     "quote": "Even in the darkest times, hope is something that you can hold on to.",
     "anime": "Kimi no Iru Machi"
-  },
-  {
-    "character": "Kino",
-    "quote": "The world is not beautiful, therefore it is.",
-    "anime": "Kino's Journey"
   },
   {
     "character": "Saitama",
@@ -424,12 +384,6 @@
 "quote": "I don't need to be saved. I'm the navigator of the Straw Hat Pirates!",
 "anime": "One Piece"
 },
-
-{
-"character": "Sanji",
-"quote": "I don't need thanks. I cook because I want to!",
-"anime": "One Piece"
-},
 {
 "character": "Tony Tony Chopper",
 "quote": "I don't care if you're a pirate or a Marine. I'll help anyone who's sick or injured!",
@@ -441,18 +395,8 @@
 "anime": "One Piece"
 },
 {
-"character": "Franky",
-"quote": "I don't need a ship. I am a ship!",
-"anime": "One Piece"
-},
-{
 "character": "Usopp",
 "quote": "I don't want to be a brave warrior of the sea. I just want to be a brave warrior of the Usopp Pirates!",
-"anime": "One Piece"
-},
-{
-"character": "Brook",
-"quote": "I don't fear death. I'm already dead!",
 "anime": "One Piece"
 },
 {
