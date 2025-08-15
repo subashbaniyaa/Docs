@@ -7,16 +7,13 @@
     <meta name="description" content="Docs" />
     <meta name="author" content="subashbaniyaa" />
 
-    <!-- Open Graph -->
     <meta property="og:title" content="Subash" />
     <meta property="og:description" content="Docs" />
     <meta property="og:image" content="https://i.ibb.co/LZJ2mSn/343289968-588712253370684-7873689768227931771-n.jpg" />
     <meta property="og:url" content="https://subash-baniya.com.np/" />
 
-    <!-- Favicon -->
     <link rel="icon" href="https://i.imgur.com/9GGNGm1.jpeg" />
 
-    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400&display=swap" rel="stylesheet" />
 
@@ -61,7 +58,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* ensures left alignment */
+        align-items: flex-start;
       }
 
       .header {
@@ -118,7 +115,7 @@
       .quote-author,
       .header,
       .sub {
-        text-align: left; /* make text/quotes left aligned */
+        text-align: left;
         justify-content: flex-start;
       }
 
@@ -157,13 +154,13 @@
       }
 
       .quote-card {
-        background:  var(--bg);
+        background: var(--bg);
         border-radius: 50px;
         padding: 10px 10px;
         display: block;
         width: 100%;
         box-sizing: border-box;
-        min-height: 150px; /* keeps card height fixed even for short quotes */
+        min-height: 150px;
       }
 
       #cardContent {
@@ -206,7 +203,6 @@
         100% { transform: rotate(360deg); }
       }
 
-      /* Collapsible Try API section */
       .try-api {
         display: flex;
         align-items: center;
@@ -243,9 +239,45 @@
         color: #007bff;
         text-decoration: underline;
       }
+
+      /* === Audio Toggle Button === */
+      .audio-toggle {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--card);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform .2s ease, box-shadow .2s ease;
+        z-index: 9999;
+      }
+      .audio-toggle:hover { transform: scale(1.05); }
+      .audio-toggle i { font-size: 18px; color: var(--text); }
+      .sr-only {
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+      }
     </style>
   </head>
   <body>
+    <!-- === Background Music (autoplay + loop) === -->
+    <!-- Put your file at /assets/suisside.mp3 -->
+    <audio id="bgMusic" src="/assets/suisside.mp3" autoplay loop preload="auto" playsinline></audio>
+
+    <!-- === Mute/Unmute Toggle (top-right) === -->
+    <button id="audioToggle" class="audio-toggle" type="button" aria-label="Toggle sound" aria-pressed="false" title="Toggle sound">
+      <i id="iconHigh" class="fa-solid fa-volume-high" aria-hidden="true"></i>
+      <i id="iconMute" class="fa-solid fa-volume-xmark" aria-hidden="true" style="display:none;"></i>
+      <span class="sr-only">Toggle background music</span>
+    </button>
+
     <div class="wrap">
       <div class="header">
         <div class="avatar"><img src="/assets/eren.jpeg" alt="Profile of Subash Baniya" /></div>
@@ -283,7 +315,6 @@
           <img src="/assets/goku.gif" alt="Sakuna" />
         </div>
 
-        <!-- Oval black background card for quotes -->
         <div class="quote-card">
           <div class="card" id="cardContent">
             <h1>Loading...</h1>
@@ -291,7 +322,6 @@
         </div>
 
         <br>
-        <!-- Try API Section -->
         <div class="try-api" id="tryApiToggle">
           <i class="fa-solid fa-link"></i>
           <span>Try API</span>
@@ -302,7 +332,6 @@
           <a href="/api/imagine?prompt=hi" target="_blank">Imagine</a>
         </div>
 
-        <!-- View Docs -->
         <p style="margin-top: 10px;">
           <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
           <a href="/api" style="color: #007bff; text-decoration: underline;">View Docs</a>
@@ -374,6 +403,58 @@
       });
 
       initQuote();
+
+      /* === Audio logic === */
+      const audio = document.getElementById("bgMusic");
+      const audioToggle = document.getElementById("audioToggle");
+      const iconHigh = document.getElementById("iconHigh");
+      const iconMute = document.getElementById("iconMute");
+
+      function updateAudioIcon() {
+        const mutedOrPaused = audio.muted || audio.paused;
+        iconHigh.style.display = mutedOrPaused ? "none" : "inline";
+        iconMute.style.display = mutedOrPaused ? "inline" : "none";
+        audioToggle.setAttribute("aria-pressed", (!mutedOrPaused).toString());
+        audioToggle.title = mutedOrPaused ? "Unmute music" : "Mute music";
+      }
+
+      async function tryAutoplay() {
+        try {
+          audio.muted = false; // we want audible playback
+          await audio.play();
+        } catch (e) {
+          // If autoplay is blocked, start after any user interaction
+          const unlock = async () => {
+            try {
+              audio.muted = false;
+              await audio.play();
+            } catch (_) {}
+            updateAudioIcon();
+            document.removeEventListener("click", unlock);
+            document.removeEventListener("keydown", unlock);
+            document.removeEventListener("touchstart", unlock);
+          };
+          document.addEventListener("click", unlock, { once: true });
+          document.addEventListener("keydown", unlock, { once: true });
+          document.addEventListener("touchstart", unlock, { once: true });
+        } finally {
+          updateAudioIcon();
+        }
+      }
+
+      audioToggle.addEventListener("click", async () => {
+        audio.muted = !audio.muted;
+        if (!audio.muted && audio.paused) {
+          try { await audio.play(); } catch (_) {}
+        }
+        updateAudioIcon();
+      });
+
+      audio.addEventListener("play", updateAudioIcon);
+      audio.addEventListener("pause", updateAudioIcon);
+      audio.addEventListener("volumechange", updateAudioIcon);
+
+      window.addEventListener("load", tryAutoplay);
     </script>
   </body>
 </html>
