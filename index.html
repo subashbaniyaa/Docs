@@ -7,12 +7,16 @@
     <meta name="description" content="Docs" />
     <meta name="author" content="subashbaniyaa" />
 
+    <!-- Open Graph -->
     <meta property="og:title" content="Subash" />
     <meta property="og:description" content="Docs" />
     <meta property="og:image" content="https://i.ibb.co/LZJ2mSn/343289968-588712253370684-7873689768227931771-n.jpg" />
     <meta property="og:url" content="https://subash-baniya.com.np/" />
 
+    <!-- Favicon -->
     <link rel="icon" href="https://i.imgur.com/9GGNGm1.jpeg" />
+
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400&display=swap" rel="stylesheet" />
 
@@ -31,7 +35,8 @@
         --transition: all 0.3s ease;
       }
 
-      html, body {
+      html,
+      body {
         margin: 0;
         font-family: "Poppins", sans-serif;
         background: var(--bg);
@@ -56,7 +61,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-start; /* ensures left alignment */
       }
 
       .header {
@@ -105,38 +110,22 @@
       .verified-badge svg {
         width: 100%;
         height: 100%;
-      }
-
-      /* Smaller inline audio toggle icon */
-      .audio-toggle {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        margin-left: 6px;
-        font-size: 14px;
-        color: var(--text);
-      }
-      .audio-toggle i {
         vertical-align: middle;
       }
 
-      .quote-card {
-        background: var(--bg);
-        border-radius: 50px;
-        padding: 10px 10px;
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-        min-height: 150px;
+      .card,
+      #cardContent,
+      .quote-author,
+      .header,
+      .sub {
+        text-align: left; /* make text/quotes left aligned */
+        justify-content: flex-start;
       }
 
-      #cardContent h1 {
+      h1 {
         font-size: 22px;
         margin: 0 0 16px;
-        line-height: 1.4;
-        word-wrap: break-word;
-        overflow-wrap: anywhere;
+        text-align: left;
       }
 
       .sub {
@@ -144,6 +133,7 @@
         font-size: 15px;
         margin-bottom: 12px;
         color: var(--accent);
+        text-align: left;
       }
 
       .sakuna-image {
@@ -152,78 +142,190 @@
         align-items: center;
         margin: 20px 0;
       }
+
       .sakuna-image img {
         width: 150px;
         height: auto;
+        transition: transform 0.3s ease;
+      }
+
+      .avatar img,
+      .sakuna-image img {
+        user-select: none;
+        -webkit-user-drag: none;
+        pointer-events: none;
+      }
+
+      .quote-card {
+        background:  var(--bg);
+        border-radius: 50px;
+        padding: 10px 10px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 150px; /* keeps card height fixed even for short quotes */
+      }
+
+      #cardContent {
+        min-height: 100px;
+        width: 100%;
+        display: block;
+        text-align: left;
+      }
+
+      #cardContent h1 {
+        font-size: 22px;
+        margin: 0 0 16px;
+        text-align: left;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        max-width: 100%;
+        width: 100%;
+        display: block;
+      }
+
+      .quote-author {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        white-space: normal;
+        font-size: 15px;
+        text-align: left;
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      #refreshIcon.spin {
+        animation: spin 0.6s linear;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Collapsible Try API section */
+      .try-api {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        gap: 6px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        user-select: none;
+      }
+
+      .try-api .triangle {
+        transition: transform 0.3s ease;
+      }
+
+      .try-api.open .triangle {
+        transform: rotate(90deg);
+      }
+
+      .try-api-options {
+        max-height: 0;
+        overflow: hidden;
+        margin-left: 26px;
+        margin-bottom: 8px;
+        flex-direction: column;
+        gap: 4px;
+        transition: max-height 0.3s ease;
+      }
+
+      .try-api-options.show {
+        max-height: 100px;
+      }
+
+      .try-api-options a {
+        color: #007bff;
+        text-decoration: underline;
       }
     </style>
   </head>
   <body>
-    <!-- Background music -->
-    <audio id="bgMusic" src="/assets/suisside.mp3" autoplay loop preload="auto" playsinline></audio>
-
     <div class="wrap">
       <div class="header">
         <div class="avatar"><img src="/assets/eren.jpeg" alt="Profile of Subash Baniya" /></div>
-        <div class="brand">subashbaniyaa
+        <div class="brand"> subashbaniyaa
           <span class="verified-badge">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
               <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon>
               <polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
             </svg>
           </span>
-          <button id="audioToggle" class="audio-toggle" title="Mute/unmute">
-            <i id="iconHigh" class="fa-solid fa-volume-high"></i>
-            <i id="iconMute" class="fa-solid fa-volume-xmark" style="display:none;"></i>
-          </button>
         </div>
       </div>
-
       <div class="card">
         <p>Web Developer —<br> crafting minimal, user-first web experiences.</p>
-        <p><i class="fa-solid fa-globe" style="margin-right: 6px;"></i> Nepal</p>
-        <p><i class="fa-solid fa-envelope" style="margin-right: 6px;"></i>
+        <p>
+          <i class="fa-solid fa-globe" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i> Nepal
+        </p>
+        <p>
+          <i class="fa-solid fa-envelope" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
           <a class="gmail-link" href="mailto:hello@subashbaniya.info.np">hello@subashbaniya.info.np</a>
         </p>
         <div class="social-icons" style="margin-top: 10px; display: flex; gap: 15px;">
-          <a href="https://instagram.com/subashbaniyaa" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://facebook.com/subashbaniyaa" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-          <a href="https://github.com/subashbaniyaa" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://instagram.com/subashbaniyaa" target="_blank" aria-label="Instagram" style="color: var(--text); font-size: 18px;">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://facebook.com/subashbaniyaa" target="_blank" aria-label="Facebook" style="color: var(--text); font-size: 18px;">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+          <a href="https://github.com/subashbaniyaa" target="_blank" aria-label="GitHub" style="color: var(--text); font-size: 18px;">
+            <i class="fa-brands fa-github"></i>
+          </a>
         </div>
-
+        <br>
         <div class="sakuna-image">
           <img src="/assets/goku.gif" alt="Sakuna" />
         </div>
 
+        <!-- Oval black background card for quotes -->
         <div class="quote-card">
-          <div id="cardContent">
+          <div class="card" id="cardContent">
             <h1>Loading...</h1>
           </div>
         </div>
 
-        <div id="tryApiToggle" style="cursor:pointer; margin-top:10px;">
-          <i class="fa-solid fa-link"></i> Try API
+        <br>
+        <!-- Try API Section -->
+        <div class="try-api" id="tryApiToggle">
+          <i class="fa-solid fa-link"></i>
+          <span>Try API</span>
+          <i class="fa-solid fa-caret-right triangle"></i>
         </div>
-        <div id="tryApiOptions" style="display:none;">
-          <a href="/api/chat?prompt=hi" target="_blank">Chat</a><br>
+        <div class="try-api-options" id="tryApiOptions">
+          <a href="/api/chat?prompt=hi" target="_blank">Chat</a> <br>
           <a href="/api/imagine?prompt=hi" target="_blank">Imagine</a>
         </div>
+
+        <!-- View Docs -->
         <p style="margin-top: 10px;">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          <a href="/api" style="color: #007bff;">View Docs</a>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
+          <a href="/api" style="color: #007bff; text-decoration: underline;">View Docs</a>
         </p>
       </div>
     </div>
 
     <script>
       const cardContent = document.getElementById("cardContent");
+      const tryApiToggle = document.getElementById("tryApiToggle");
+      const tryApiOptions = document.getElementById("tryApiOptions");
 
       async function fetchQuote() {
         try {
           const res = await fetch("/api");
           if (!res.ok) throw new Error("Failed to fetch API");
+
           const data = await res.json();
-          return data.find(item => item.quote) || null;
+          const quoteObj = data.find(item => item.quote);
+
+          if (!quoteObj) throw new Error("No quote found");
+
+          return quoteObj;
         } catch (err) {
           console.error(err);
           return null;
@@ -232,57 +334,46 @@
 
       function renderQuote(quoteObj) {
         if (!quoteObj) {
-          cardContent.innerHTML = "<h1>Failed to load content.</h1>";
+          cardContent.innerHTML = `
+            <h1>Failed to load content.</h1>
+            <button id="retryBtn" style="background:#007bff;color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;margin-top:10px;">
+              Retry
+            </button>
+          `;
+          document.getElementById("retryBtn").addEventListener("click", initQuote);
           return;
         }
-        cardContent.innerHTML = `<h1>${quoteObj.quote}</h1>
-        <div class="sub">— ${quoteObj.character}, ${quoteObj.anime}</div>`;
+
+        cardContent.innerHTML = `
+          <h1>${quoteObj.quote}</h1>
+          <div class="sub quote-author">
+            <span>— ${quoteObj.character}, ${quoteObj.anime}</span>
+            <i class="fa-solid fa-repeat" id="refreshIcon" title="Refresh Quote" style="color: #007bff; cursor: pointer;"></i>
+          </div>
+        `;
+
+        const refreshIcon = document.getElementById("refreshIcon");
+        refreshIcon.addEventListener("click", async () => {
+          refreshIcon.classList.add("spin");
+          const newQuote = await fetchQuote();
+          renderQuote(newQuote);
+          setTimeout(() => refreshIcon.classList.remove("spin"), 600);
+        });
       }
 
       async function initQuote() {
         const quoteObj = await fetchQuote();
         renderQuote(quoteObj);
       }
+
+      tryApiToggle.addEventListener("click", () => {
+        const isOpen = tryApiOptions.classList.contains("show");
+        tryApiOptions.style.maxHeight = isOpen ? "0" : tryApiOptions.scrollHeight + "px";
+        tryApiOptions.classList.toggle("show", !isOpen);
+        tryApiToggle.classList.toggle("open", !isOpen);
+      });
+
       initQuote();
-
-      /* Music toggle */
-      const audio = document.getElementById("bgMusic");
-      const audioToggle = document.getElementById("audioToggle");
-      const iconHigh = document.getElementById("iconHigh");
-      const iconMute = document.getElementById("iconMute");
-
-      function updateAudioIcon() {
-        const muted = audio.muted || audio.paused;
-        iconHigh.style.display = muted ? "none" : "inline";
-        iconMute.style.display = muted ? "inline" : "none";
-      }
-
-      audioToggle.addEventListener("click", () => {
-        audio.muted = !audio.muted;
-        if (!audio.muted && audio.paused) audio.play();
-        updateAudioIcon();
-      });
-
-      window.addEventListener("load", async () => {
-        try {
-          audio.muted = false;
-          await audio.play();
-        } catch (e) {
-          console.warn("Autoplay blocked, will try after interaction.");
-          const resume = async () => {
-            try {
-              audio.muted = false;
-              await audio.play();
-            } catch(_) {}
-            updateAudioIcon();
-            document.removeEventListener("click", resume);
-            document.removeEventListener("keydown", resume);
-          };
-          document.addEventListener("click", resume);
-          document.addEventListener("keydown", resume);
-        }
-        updateAudioIcon();
-      });
     </script>
   </body>
 </html>
