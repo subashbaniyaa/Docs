@@ -122,7 +122,7 @@
       h1 {
         font-size: 22px;
         margin: 0 0 16px;
-        text-align: left; /* keep quote left aligned */
+        text-align: left;
       }
 
       .sub {
@@ -153,21 +153,33 @@
         pointer-events: none;
       }
 
-      /* Quote section stays fixed height so short quotes don't shift layout */
+      /* Quote section */
       #cardContent {
-        min-height: 100px; /* ensures space is reserved */
+        min-height: 100px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
+        gap: 6px;
       }
 
-      /* Refresh icon next to anime name */
+      #cardContent h1 {
+        font-size: 22px;
+        margin: 0;
+        text-align: left;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+        max-width: 100%;
+      }
+
       .quote-author {
-        display: inline-flex;
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
         gap: 6px;
-        white-space: nowrap;
+        white-space: normal;
+        font-size: 15px;
       }
 
       #refreshIcon.spin {
