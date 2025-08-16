@@ -61,7 +61,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* ensures left alignment */
+        align-items: flex-start;
       }
 
       .header {
@@ -118,7 +118,7 @@
       .quote-author,
       .header,
       .sub {
-        text-align: left; /* make text/quotes left aligned */
+        text-align: left;
         justify-content: flex-start;
       }
 
@@ -163,7 +163,7 @@
         display: block;
         width: 100%;
         box-sizing: border-box;
-        min-height: 150px; /* keeps card height fixed even for short quotes */
+        min-height: 150px;
       }
 
       #cardContent {
@@ -206,7 +206,6 @@
         100% { transform: rotate(360deg); }
       }
 
-      /* Collapsible Try API section */
       .try-api {
         display: flex;
         align-items: center;
@@ -264,7 +263,7 @@
           <i class="fa-solid fa-globe" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i> Nepal
         </p>
         <p>
-          <i class="fa-brands fa-whatsapp" style="margin-right: 6px; font-size: 17px; color: var(--text);"></i>
+          <i class="fa-brands fa-whatsapp" style="margin-right: 6px; font-size: 17px; color: #25D366;"></i>
           <a class="gmail-link" href="https://wa.me/9876543210">+977 9876543210</a>
         </p>
         <p>
@@ -272,16 +271,23 @@
           <a class="gmail-link" href="mailto:hello@subashbaniya.info.np">hello@subashbaniya.info.np</a>
         </p>
         <div class="social-icons" style="margin-top: 10px; display: flex; gap: 15px;">
-  <a href="https://instagram.com/subashbaniyaa" target="_blank" aria-label="Instagram" style="color: var(--text); font-size: 18px;">
-    <i class="fa-brands fa-instagram"></i>
-  </a>
-  <a href="https://facebook.com/subashbaniyaa" target="_blank" aria-label="Facebook" style="color: var(--text); font-size: 18px;">
+          <a href="https://instagram.com/subashbaniyaa" target="_blank" aria-label="Instagram" 
+             style="font-size: 18px;
+                    background: radial-gradient(circle at 30% 107%, 
+                      #fdf497 0%, #fdf497 5%, 
+                      #fd5949 45%, #d6249f 60%, #285AEB 90%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    display: inline-block;">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+  <a href="https://facebook.com/subashbaniyaa" target="_blank" aria-label="Facebook" style="color: #1877F2; font-size: 18px;">
     <i class="fa-brands fa-facebook"></i>
   </a>
   <a href="https://github.com/subashbaniyaa" target="_blank" aria-label="GitHub" style="color: var(--text); font-size: 18px;">
     <i class="fa-brands fa-github"></i>
   </a>
-  <a href="https://open.spotify.com/user/31ied3yyuiindctzjfrrkj62fgfm?si=lFf6tb_3TGCBOcHVeqfv6Q" target="_blank" aria-label="Spotify" style="color: var(--text); font-size: 18px;">
+  <a href="https://open.spotify.com/user/31ied3yyuiindctzjfrrkj62fgfm?si=lFf6tb_3TGCBOcHVeqfv6Q" target="_blank" aria-label="Spotify" style="color: #1DB954; font-size: 18px;">
     <i class="fa-brands fa-spotify"></i>
   </a>
 </div>        <br>
