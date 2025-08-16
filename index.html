@@ -69,14 +69,6 @@
         align-items: center;
         gap: 12px;
         margin-bottom: 20px;
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .header-left {
-        display: flex;
-        align-items: center;
-        gap: 12px;
       }
 
       .avatar {
@@ -121,19 +113,12 @@
         vertical-align: middle;
       }
 
-      .music-toggle {
-        font-size: 14px; /* smaller size */
-        color: var(--text);
-        cursor: pointer;
-        margin-left: auto; /* push to right */
-      }
-
       .card,
       #cardContent,
       .quote-author,
       .header,
       .sub {
-        text-align: left;
+        text-align: left; /* make text/quotes left aligned */
         justify-content: flex-start;
       }
 
@@ -172,13 +157,13 @@
       }
 
       .quote-card {
-        background: var(--bg);
+        background:  var(--bg);
         border-radius: 50px;
         padding: 10px 10px;
         display: block;
         width: 100%;
         box-sizing: border-box;
-        min-height: 150px;
+        min-height: 150px; /* keeps card height fixed even for short quotes */
       }
 
       #cardContent {
@@ -221,6 +206,7 @@
         100% { transform: rotate(360deg); }
       }
 
+      /* Collapsible Try API section */
       .try-api {
         display: flex;
         align-items: center;
@@ -262,22 +248,16 @@
   <body>
     <div class="wrap">
       <div class="header">
-        <div class="header-left">
-          <div class="avatar"><img src="/assets/eren.jpeg" alt="Profile of Subash Baniya" /></div>
-          <div class="brand"> subashbaniyaa
-            <span class="verified-badge">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon>
-                <polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
-              </svg>
-            </span>
-          </div>
-        </div>
-        <div class="music-toggle">
-          <i id="musicIcon" class="fa-solid fa-volume-up"></i>
+        <div class="avatar"><img src="/assets/eren.jpeg" alt="Profile of Subash Baniya" /></div>
+        <div class="brand"> subashbaniyaa
+          <span class="verified-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+              <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon>
+              <polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
+            </svg>
+          </span>
         </div>
       </div>
-
       <div class="card">
         <p>Web Developer —<br> crafting minimal, user-first web experiences.</p>
         <p>
@@ -292,24 +272,24 @@
           <a class="gmail-link" href="mailto:hello@subashbaniya.info.np">hello@subashbaniya.info.np</a>
         </p>
         <div class="social-icons" style="margin-top: 10px; display: flex; gap: 15px;">
-          <a href="https://instagram.com/subashbaniyaa" target="_blank" aria-label="Instagram" style="color: var(--text); font-size: 18px;">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://facebook.com/subashbaniyaa" target="_blank" aria-label="Facebook" style="color: var(--text); font-size: 18px;">
-            <i class="fa-brands fa-facebook"></i>
-          </a>
-          <a href="https://github.com/subashbaniyaa" target="_blank" aria-label="GitHub" style="color: var(--text); font-size: 18px;">
-            <i class="fa-brands fa-github"></i>
-          </a>
-          <a href="https://open.spotify.com/user/31ied3yyuiindctzjfrrkj62fgfm?si=lFf6tb_3TGCBOcHVeqfv6Q" target="_blank" aria-label="Spotify" style="color: var(--text); font-size: 18px;">
-            <i class="fa-brands fa-spotify"></i>
-          </a>
-        </div>
-        <br>
+  <a href="https://instagram.com/subashbaniyaa" target="_blank" aria-label="Instagram" style="color: var(--text); font-size: 18px;">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
+  <a href="https://facebook.com/subashbaniyaa" target="_blank" aria-label="Facebook" style="color: var(--text); font-size: 18px;">
+    <i class="fa-brands fa-facebook"></i>
+  </a>
+  <a href="https://github.com/subashbaniyaa" target="_blank" aria-label="GitHub" style="color: var(--text); font-size: 18px;">
+    <i class="fa-brands fa-github"></i>
+  </a>
+  <a href="https://open.spotify.com/user/31ied3yyuiindctzjfrrkj62fgfm?si=lFf6tb_3TGCBOcHVeqfv6Q" target="_blank" aria-label="Spotify" style="color: var(--text); font-size: 18px;">
+    <i class="fa-brands fa-spotify"></i>
+  </a>
+</div>        <br>
         <div class="sakuna-image">
           <img src="/assets/goku.gif" alt="Sakuna" />
         </div>
 
+        <!-- Oval black background card for quotes -->
         <div class="quote-card">
           <div class="card" id="cardContent">
             <h1>Loading...</h1>
@@ -317,6 +297,7 @@
         </div>
 
         <br>
+        <!-- Try API Section -->
         <div class="try-api" id="tryApiToggle">
           <i class="fa-solid fa-link"></i>
           <span>Try API</span>
@@ -327,6 +308,7 @@
           <a href="/api/imagine?prompt=hi" target="_blank">Imagine</a>
         </div>
 
+        <!-- View Docs -->
         <p style="margin-top: 10px;">
           <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
           <a href="/api" style="color: #007bff; text-decoration: underline;">View Docs</a>
@@ -334,23 +316,21 @@
       </div>
     </div>
 
-    <!-- Hidden audio element -->
-    <audio id="bgMusic" src="/assets/suisside.mp3" autoplay loop></audio>
-
     <script>
       const cardContent = document.getElementById("cardContent");
       const tryApiToggle = document.getElementById("tryApiToggle");
       const tryApiOptions = document.getElementById("tryApiOptions");
-      const bgMusic = document.getElementById("bgMusic");
-      const musicIcon = document.getElementById("musicIcon");
 
       async function fetchQuote() {
         try {
           const res = await fetch("/api");
           if (!res.ok) throw new Error("Failed to fetch API");
+
           const data = await res.json();
           const quoteObj = data.find(item => item.quote);
+
           if (!quoteObj) throw new Error("No quote found");
+
           return quoteObj;
         } catch (err) {
           console.error(err);
@@ -397,22 +377,6 @@
         tryApiOptions.style.maxHeight = isOpen ? "0" : tryApiOptions.scrollHeight + "px";
         tryApiOptions.classList.toggle("show", !isOpen);
         tryApiToggle.classList.toggle("open", !isOpen);
-      });
-
-      // Music toggle
-      bgMusic.autoplay = true;
-      bgMusic.muted = false;
-      bgMusic.play().catch(()=>{});
-      musicIcon.addEventListener("click", () => {
-        if (bgMusic.muted) {
-          bgMusic.muted = false;
-          musicIcon.classList.remove("fa-volume-mute");
-          musicIcon.classList.add("fa-volume-up");
-        } else {
-          bgMusic.muted = true;
-          musicIcon.classList.remove("fa-volume-up");
-          musicIcon.classList.add("fa-volume-mute");
-        }
       });
 
       initQuote();
