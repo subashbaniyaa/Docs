@@ -2,18 +2,17 @@
 <html lang="en-US">
   <head>
     <meta charset="UTF-8" />
-    <title>Subash</title>
+    <title>Subash Baniya — Web Designer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Docs" />
+    <meta name="description" content="Minimal, user-first web experiences by Subash Baniya — Web Designer from Nepal." />
     <meta name="author" content="subashbaniyaa" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Subash" />
-    <meta property="og:description" content="Docs" />
+    <meta property="og:title" content="Subash Baniya — Web Designer" />
+    <meta property="og:description" content="Minimal, user-first web experiences by Subash Baniya from Nepal." />
     <meta property="og:image" content="https://i.ibb.co/LZJ2mSn/343289968-588712253370684-7873689768227931771-n.jpg" />
     <meta property="og:url" content="https://subash-baniya.com.np/" />
 
-    <!-- Favicon -->
     <link rel="icon" href="https://i.imgur.com/9GGNGm1.jpeg" />
 
     <!-- Fonts & Icons -->
@@ -23,12 +22,10 @@
     <style>
       :root {
         --bg: #0f0f10;
-        --panel: #111215;
         --text: #e9e9ec;
         --muted: #b7b8bf;
         --accent: #ffffff;
         --card: #17181c;
-        --border: #24262c;
         --pill-active: #eaeaea;
         --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         --radius: 18px;
@@ -60,9 +57,8 @@
         z-index: -1;
       }
 
-      .gmail-link {
+      a {
         color: #007bff;
-        font-weight: 500;
         text-decoration: underline;
       }
 
@@ -76,7 +72,7 @@
         align-items: flex-start;
       }
 
-      .header {
+      header {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -95,6 +91,9 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        user-select: none;
+        -webkit-user-drag: none;
+        pointer-events: none;
       }
 
       .brand {
@@ -117,22 +116,12 @@
       .verified-badge svg {
         width: 100%;
         height: 100%;
-        vertical-align: middle;
       }
 
-      .card,
-      #cardContent,
-      .quote-author,
-      .header,
-      .sub {
-        text-align: left;
-        justify-content: flex-start;
-      }
-
-      h1 {
+      main h1 {
         font-size: 22px;
         margin: 0 0 16px;
-        text-align: left;
+        line-height: 1.4;
       }
 
       .sub {
@@ -140,7 +129,6 @@
         font-size: 15px;
         margin-bottom: 12px;
         color: var(--accent);
-        text-align: left;
       }
 
       .sakuna-image {
@@ -153,35 +141,11 @@
       .sakuna-image img {
         width: 150px;
         height: auto;
-      }
-
-      .avatar img,
-      .sakuna-image img {
         user-select: none;
         -webkit-user-drag: none;
         pointer-events: none;
       }
 
-      #cardContent {
-        min-height: 100px;
-        width: 100%;
-        display: block;
-        text-align: left;
-      }
-
-      #cardContent h1 {
-        font-size: 22px;
-        margin: 0 0 16px;
-        text-align: left;
-        line-height: 1.4;
-        word-wrap: break-word;
-        overflow-wrap: anywhere;
-        max-width: 100%;
-        width: 100%;
-        display: block;
-      }
-
-      /* Only color change on hover for words */
       .quote-word {
         display: inline-block;
         cursor: pointer;
@@ -205,11 +169,7 @@
         flex-wrap: wrap;
         align-items: center;
         gap: 6px;
-        white-space: normal;
         font-size: 15px;
-        text-align: left;
-        justify-content: flex-start;
-        width: 100%;
       }
 
       #refreshIcon.spin {
@@ -220,104 +180,53 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
-
-      .try-api {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        gap: 6px;
-        font-weight: 500;
-        margin-bottom: 4px;
-        user-select: none;
-      }
-
-      .try-api .triangle {
-        transition: transform 0.3s ease;
-      }
-
-      .try-api.open .triangle {
-        transform: rotate(90deg);
-      }
-
-      .try-api-options {
-        max-height: 0;
-        overflow: hidden;
-        margin-left: 26px;
-        margin-bottom: 8px;
-        flex-direction: column;
-        gap: 4px;
-        transition: max-height 0.3s ease;
-      }
-
-      .try-api-options.show {
-        max-height: 100px;
-      }
-
-      .try-api-options a {
-        color: #007bff;
-        text-decoration: underline;
-      }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <div class="header">
-        <div class="avatar"><img src="/assets/eren.jpeg" alt="Profile of Subash Baniya" /></div>
-        <div class="brand"> subashbaniyaa
-          <span class="verified-badge">
+      <header>
+        <div class="avatar">
+          <img src="/assets/eren.jpeg" alt="Profile picture of Subash Baniya" loading="lazy" />
+        </div>
+        <div class="brand">subashbaniyaa
+          <span class="verified-badge" aria-label="Verified account">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
               <polygon fill="#42a5f5" points="29.62,3 33.053,8.308 39.367,8.624 39.686,14.937 44.997,18.367 42.116,23.995 45,29.62 39.692,33.053 39.376,39.367 33.063,39.686 29.633,44.997 24.005,42.116 18.38,45 14.947,39.692 8.633,39.376 8.314,33.063 3.003,29.633 5.884,24.005 3,18.38 8.308,14.947 8.624,8.633 14.937,8.314 18.367,3.003 23.995,5.884"></polygon>
               <polygon fill="#fff" points="21.396,31.255 14.899,24.76 17.021,22.639 21.428,27.046 30.996,17.772 33.084,19.926"></polygon>
             </svg>
           </span>
         </div>
-      </div>
-      <div class="card">
+      </header>
+
+      <main>
         <p>Web Designer —<br> crafting minimal, user-first web experiences.</p>
         <p>
-          <i class="fa-solid fa-globe" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i> Nepal
+          <i class="fa-solid fa-globe" style="margin-right: 6px; font-size: 14px;"></i> Nepal
         </p>
         <p>
-          <i class="fa-brands fa-whatsapp" style="margin-right: 6px; font-size: 17px; color: #25D366;"></i>
-          <a class="gmail-link" href="https://wa.me/9876543210">+977 9876543210</a>
+          <i class="fa-solid fa-envelope" style="margin-right: 6px; font-size: 14px;"></i>
+          <a href="mailto:hello@subashbaniya.info.np">hello@subashbaniya.info.np</a>
         </p>
-        <p>
-          <i class="fa-solid fa-envelope" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
-          <a class="gmail-link" href="mailto:hello@subashbaniya.info.np">hello@subashbaniya.info.np</a>
-        </p>
-        <br>
+
         <div class="sakuna-image">
-          <img src="/assets/goku.gif" alt="Sakuna" />
+          <img src="/assets/goku.gif" alt="Animated GIF of Goku" loading="lazy" />
         </div>
 
-        <div class="quote-card">
+        <section class="quote-card">
           <div class="card" id="cardContent">
             <h1>Loading...</h1>
           </div>
-        </div>
-
-        <br>
-        <div class="try-api" id="tryApiToggle">
-          <i class="fa-solid fa-link"></i>
-          <span>Try API</span>
-          <i class="fa-solid fa-caret-right triangle"></i>
-        </div>
-        <div class="try-api-options" id="tryApiOptions">
-          <a href="/api/chat?prompt=hi" target="_blank">Chat</a> <br>
-          <a href="/api/imagine?prompt=hi" target="_blank">Imagine</a>
-        </div>
+        </section>
 
         <p style="margin-top: 10px;">
-          <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
-          <a href="/api" style="color: #007bff; text-decoration: underline;">View Docs</a>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 13px;"></i>
+          <a href="/api">View Docs</a>
         </p>
-      </div>
+      </main>
     </div>
 
     <script>
       const cardContent = document.getElementById("cardContent");
-      const tryApiToggle = document.getElementById("tryApiToggle");
-      const tryApiOptions = document.getElementById("tryApiOptions");
 
       async function fetchQuote() {
         try {
@@ -353,8 +262,6 @@
         }
 
         const words = wrapWords(quoteObj.quote);
-
-        // Split author and anime words
         const authorWords = wrapWords(`— ${quoteObj.character},`);
         const animeWords = wrapWords(`${quoteObj.anime}`);
 
@@ -379,13 +286,6 @@
         const quoteObj = await fetchQuote();
         renderQuote(quoteObj);
       }
-
-      tryApiToggle.addEventListener("click", () => {
-        const isOpen = tryApiOptions.classList.contains("show");
-        tryApiOptions.style.maxHeight = isOpen ? "0" : tryApiOptions.scrollHeight + "px";
-        tryApiOptions.classList.toggle("show", !isOpen);
-        tryApiToggle.classList.toggle("open", !isOpen);
-      });
 
       initQuote();
     </script>
