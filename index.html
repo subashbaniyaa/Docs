@@ -95,11 +95,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.3s ease;
-      }
-
-      .avatar:hover img {
-        transform: scale(1.05);
       }
 
       .brand {
@@ -158,7 +153,6 @@
       .sakuna-image img {
         width: 150px;
         height: auto;
-        transition: transform 0.3s ease;
       }
 
       .avatar img,
@@ -185,6 +179,25 @@
         max-width: 100%;
         width: 100%;
         display: block;
+      }
+
+      /* Only color change on hover for words */
+      .quote-word {
+        display: inline-block;
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+      .quote-word:hover {
+        color: #9e52b1;
+      }
+
+      .quote-author span {
+        display: inline-block;
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+      .quote-author span:hover {
+        color: #9e52b1;
       }
 
       .quote-author {
@@ -272,12 +285,11 @@
           <i class="fa-solid fa-envelope" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
           <a class="gmail-link" href="mailto:hello@subashbaniya.info.np">hello@subashbaniya.info.np</a>
         </p>
-              <br>
+        <br>
         <div class="sakuna-image">
           <img src="/assets/goku.gif" alt="Sakuna" />
         </div>
 
-        <!-- Oval black background card for quotes -->
         <div class="quote-card">
           <div class="card" id="cardContent">
             <h1>Loading...</h1>
@@ -285,7 +297,6 @@
         </div>
 
         <br>
-        <!-- Try API Section -->
         <div class="try-api" id="tryApiToggle">
           <i class="fa-solid fa-link"></i>
           <span>Try API</span>
@@ -296,7 +307,6 @@
           <a href="/api/imagine?prompt=hi" target="_blank">Imagine</a>
         </div>
 
-        <!-- View Docs -->
         <p style="margin-top: 10px;">
           <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 14px; color: var(--text);"></i>
           <a href="/api" style="color: #007bff; text-decoration: underline;">View Docs</a>
@@ -326,6 +336,10 @@
         }
       }
 
+      function wrapWords(text, className = "quote-word") {
+        return text.split(" ").map(word => `<span class="${className}">${word}</span>`).join(" ");
+      }
+
       function renderQuote(quoteObj) {
         if (!quoteObj) {
           cardContent.innerHTML = `
@@ -338,10 +352,16 @@
           return;
         }
 
+        const words = wrapWords(quoteObj.quote);
+
+        // Split author and anime words
+        const authorWords = wrapWords(`— ${quoteObj.character},`);
+        const animeWords = wrapWords(`${quoteObj.anime}`);
+
         cardContent.innerHTML = `
-          <h1>${quoteObj.quote}</h1>
+          <h1>${words}</h1>
           <div class="sub quote-author">
-            <span>— ${quoteObj.character}, ${quoteObj.anime}</span>
+            ${authorWords} ${animeWords}
             <i class="fa-solid fa-repeat" id="refreshIcon" title="Refresh Quote" style="color: #007bff; cursor: pointer;"></i>
           </div>
         `;
