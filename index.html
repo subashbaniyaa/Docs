@@ -211,13 +211,13 @@
         <div class="sakuna-image">
           <img src="/assets/goku.gif" alt="Gif" loading="lazy" />
         </div>
-        <br>
+
         <section class="quote-card">
           <div class="card" id="cardContent">
             <h1>Loading...</h1>
           </div>
         </section>
-      <br>
+
         <p style="margin-top: 10px;">
           <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 6px; font-size: 13px;"></i>
           <a href="/api">View Docs</a>
@@ -249,14 +249,11 @@
         return text.split(" ").map(word => `<span class="${className}">${word}</span>`).join(" ");
       }
 
-      function renderQuote(quoteObj) {
+        function renderQuote(quoteObj) {
         if (!quoteObj) {
           cardContent.innerHTML = `
             <h1>Failed to load content.</h1>
-            <button id="retryBtn" style="background:#007bff;color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;margin-top:10px;"> Retry
-            </button>
           `;
-          document.getElementById("retryBtn").addEventListener("click", initQuote);
           return;
         }
 
