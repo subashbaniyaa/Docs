@@ -20,10 +20,6 @@ app.use(cors());
 
 app.use(express.static(__dirname));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 const readJsonFile = async (filePath) => {
@@ -54,7 +50,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api', async (req, res) => {
+app.get('/', async (req, res) => {
   try {
     const now = moment.tz('Asia/Kathmandu');
     const neTime = now.format('hh:mm:ss A');
@@ -64,7 +60,7 @@ app.get('/api', async (req, res) => {
     const nepaliDateInstance = new NepaliDate(kathmanduDate);
     const bsDateStr = nepaliDateInstance.format('dddd, MMMM DD, YYYY');
 
-    const filePath = path.join(__dirname, 'assets', 'quotes_db.json');
+    const filePath = path.join(__dirname, 'quotes_db.json');
     const quotes = await readJsonFile(filePath);
 
     if (!quotes || quotes.length === 0) {
@@ -88,8 +84,8 @@ app.get('/api', async (req, res) => {
       },
       {
         api: {
-          ai: "/api/chat?prompt=your_prompt",
-          t2i: "/api/imagine?prompt=your_prompt",
+          ai: "/chat?prompt=your_prompt",
+          t2i: "/imagine?prompt=your_prompt",
         },
       },
       {
@@ -113,7 +109,7 @@ app.get('/api', async (req, res) => {
 
 const badWords = ["subash", "baniya"];
 
-app.get('/api/imagine', async (req, res) => {
+app.get('/imagine', async (req, res) => {
   const prompt = req.query.prompt;
 
   if (!prompt) {
@@ -162,7 +158,7 @@ app.get('/api/imagine', async (req, res) => {
   }
 });
 
-app.get("/api/chat", async (req, res) => {
+app.get("/chat", async (req, res) => {
     const prompt = req.query.prompt;
 
     if (!prompt) {
@@ -208,7 +204,7 @@ app.get("/api/chat", async (req, res) => {
 
 
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, '404.html'));
+  res.status(404).json({ error: "Page not found" });
 });
 
 app.listen(PORT, () => {
