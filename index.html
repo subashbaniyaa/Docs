@@ -15,6 +15,9 @@
 
     <link rel="icon" href="https://i.imgur.com/9GGNGm1.jpeg" />
 
+    <!-- Open Props for durations -->
+    <link rel="stylesheet" href="https://unpkg.com/open-props/durations.min.css">
+
     <style>
       html, body {
         margin: 0;
@@ -28,19 +31,71 @@
         font-family: "Times New Roman", serif;
       }
 
-      .text {
-        font-size: 45px;
-        font-weight: bold;
-        color: #fff;
-        user-select: none;
+      /* typed a length for size interpolation */
+      @property --lines {
+        syntax: "<length>";
+        inherits: false;
+        initial-value: 0.00010px;
       }
 
-      .text span {
-        color: red;
+      /* ping/pong animation */
+      @keyframes liner {
+        50% {
+          --lines: 0.00012px;
+        }
+      }
+
+      .noise {
+        animation: liner var(--hour, 10s) linear infinite;
+
+        /* repeating subpixel radial hard stop lines for mask */
+        -webkit-mask: repeating-radial-gradient(
+          circle at center,
+          #000,
+          var(--lines),
+          #000,
+          0,
+          #0000,
+          calc(var(--lines) * 2),
+          #0000 0
+        );
+        mask: repeating-radial-gradient(
+          circle at center,
+          #000,
+          var(--lines),
+          #000,
+          0,
+          #0000,
+          calc(var(--lines) * 2),
+          #0000 0
+        );
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .noise h1 {
+        font-size: 45px;
+        font-weight: bold;
+        background-image: linear-gradient(to right, deeppink, blue);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        /* light mode fallback */
+        @media (prefers-color-scheme: light) {
+          background-image: linear-gradient(to right, black, gray);
+        }
+      }
+
+      .noise h1 span {
+        /* optional: can add different gradient or effect on punctuation */
       }
     </style>
   </head>
   <body>
-    <div class="text">hello<span>!</span></div>
+    <div class="noise">
+      <h1>hello<span>!</span></h1>
+    </div>
   </body>
 </html>
