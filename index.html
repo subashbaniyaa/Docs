@@ -17,12 +17,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
-    /* Basic reset and dark mode */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      user-select: none; /* prevent text selection */
+      user-select: none;
     }
 
     body {
@@ -53,7 +52,7 @@
       border: 4px solid #6366f1;
       box-shadow: 0 6px 16px rgba(0,0,0,0.1);
       transition: transform 0.3s;
-      pointer-events: none; /* prevent download / context menu */
+      pointer-events: none;
       -webkit-user-drag: none;
     }
 
@@ -77,35 +76,19 @@
       vertical-align: middle;
     }
 
-    .bio {
+    .quote {
       font-weight: 300;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       margin: 1.5rem auto;
       opacity: 0.9;
-      max-width: 80%;
-      line-height: 1.7;
+      max-width: 85%;
+      line-height: 1.6;
     }
 
-    .contact p {
-      margin: 0.6rem 0;
-      font-weight: 300;
-      font-size: 1.05rem;
-    }
-
-    .copy-btn {
-      background: none;
-      border: none;
-      color: #6366f1;
-      cursor: pointer;
-      font-size: 0.85rem;
-      margin-left: 0.5rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      transition: 0.3s;
-    }
-
-    .copy-btn:hover {
-      background-color: rgba(99, 102, 241, 0.1);
+    .quote-author {
+      font-weight: 500;
+      font-size: 1rem;
+      margin-top: 0.5rem;
     }
 
     .social {
@@ -117,7 +100,7 @@
     }
 
     .social a {
-      font-size: 1rem; /* smaller icons */
+      font-size: 1rem;
       width: 32px;
       height: 32px;
       display: flex;
@@ -135,8 +118,7 @@
     }
 
     @media (max-width: 600px) {
-      .bio {
-        max-width: 100%;
+      .quote {
         font-size: 1rem;
       }
 
@@ -154,47 +136,46 @@
 </head>
 <body>
   <div class="container">
-    <img src="eren.jpeg" alt="Subash Baniya Profile Picture" class="profile-pic" />
+    <img src="/assets/eren.jpeg" alt="🌞" class="profile-pic" />
     <h1>
       subashbaniyaa
       <img src="https://img.icons8.com/color/48/verified-badge.png" alt="verified badge" />
     </h1>
-    <p class="bio">Web Developer from Nepal — crafting minimal, user-first web experiences.</p>
 
-    <div class="contact">
-      <p>+977 9876543210</p>
-      <p>
-        <span id="email">hello@subashbaniya.info.np</span>
-        <button class="copy-btn" onclick="copyEmail()" aria-label="Copy email address">Copy</button>
-      </p>
+    <div class="quote">
+      <p id="quote">Loading quote...</p>
+      <p class="quote-author" id="author"></p>
     </div>
 
-    <div class="section">
-      <div class="social">
-        <a href="/api" target="_blank" rel="noopener noreferrer" aria-label="Docs">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        </a>
-        <a href="https://github.com/subashbaniyaa" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-      </div>
+    <div class="social">
+      <a href="/api" target="_blank" rel="noopener noreferrer" aria-label="Docs">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      </a>
     </div>
+  </div>
 
   <script>
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    async function fetchQuote() {
+      try {
+        const res = await fetch('quotes_db.json');
+        if (!res.ok) throw new Error('Network response not ok');
+        const data = await res.json();
 
-    // Copy email
-    function copyEmail() {
-      const email = document.getElementById('email').textContent;
-      navigator.clipboard.writeText(email)
-        .then(() => {
-          const btn = document.querySelector('.copy-btn');
-          btn.textContent = 'Copied!';
-          setTimeout(() => btn.textContent = 'Copy', 2000);
-        })
-        .catch(() => alert('Failed to copy email. Please copy manually.'));
+        if (Array.isArray(data) && data.length > 0) {
+          const randomQuote = data[Math.floor(Math.random() * data.length)];
+          document.getElementById('quote').textContent = randomQuote.quote;
+          document.getElementById('author').textContent = `— ${randomQuote.character}, ${randomQuote.anime}`;
+        } else {
+          document.getElementById('quote').textContent = "No quotes available.";
+        }
+      } catch (err) {
+        console.error('Failed to fetch quote:', err);
+        document.getElementById('quote').textContent = "Failed to load quote.";
+      }
     }
+
+    fetchQuote();
   </script>
 </body>
 </html>
