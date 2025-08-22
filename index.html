@@ -31,16 +31,26 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      text-align: center;
       min-height: 100vh;
       line-height: 1.6;
       padding: 20px;
       overflow: hidden;
     }
 
+    img, a, h1, p, div {
+      -webkit-user-drag: none;
+      pointer-events: auto;
+    }
+
     .container {
       max-width: 720px;
       width: 90%;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     img.profile-pic {
@@ -53,7 +63,6 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.1);
       transition: transform 0.3s;
       pointer-events: none;
-      -webkit-user-drag: none;
     }
 
     img.profile-pic:hover {
@@ -61,7 +70,6 @@
     }
 
     h1 {
-      margin: 0.5rem 0;
       font-weight: 700;
       font-size: 1.5rem;
       display: flex;
@@ -74,6 +82,8 @@
       width: 25px;
       height: 25px;
       vertical-align: middle;
+      pointer-events: none;
+      -webkit-user-drag: none;
     }
 
     .quote {
@@ -133,6 +143,9 @@
       }
     }
   </style>
+  <script>
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+  </script>
 </head>
 <body>
   <div class="container">
@@ -150,7 +163,6 @@
     <div class="social">
       <a href="/api" target="_blank" rel="noopener noreferrer" aria-label="Docs">
         <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      </a>
       </a>
     </div>
   </div>
