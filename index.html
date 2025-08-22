@@ -1,101 +1,489 @@
-<!doctype html>
-<html lang="en-US">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Subash</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Minimal, user-first web experiences by Subash Baniya — Web Designer from Nepal." />
-    <meta name="author" content="subashbaniyaa" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Subash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Crafting user-first web experiences." />
+  <meta name="author" content="Subash Baniya" />
+  
+  <meta property="og:title" content="forcodespace" />
+  <meta property="og:description" content="Crafting user-first web experiences." />
+  <meta property="og:image" content="https://i.ibb.co/z1kgF6W/481849257-2943868939253544-8815298265069237979-n.jpg" />
+  <meta property="og:url" content="https://subash-baniya.com.np/" />
+  
+  <link rel="icon" href="https://i.imgur.com/9GGNGm1.jpeg" type="image/png" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="preload" href="susside.mp3" as="audio" />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Subash Baniya — Web Designer" />
-    <meta property="og:description" content="Minimal, user-first web experiences by Subash Baniya from Nepal." />
-    <meta property="og:image" content="https://i.ibb.co/LZJ2mSn/343289968-588712253370684-7873689768227931771-n.jpg" />
-    <meta property="og:url" content="https://subash-baniya.com.np/" />
+  <style>
+    :root {
+      --bg-light: #f9f9f9;
+      --text-light: #1a1a1a;
+      --bg-dark: #121212;
+      --text-dark: #f1f1f1;
+      --accent: #6366f1;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --section-spacing: 2rem;
+      --element-spacing: 1rem;
+    }
 
-    <link rel="icon" href="https://i.imgur.com/9GGNGm1.jpeg" />
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <!-- Open Props for durations -->
-    <link rel="stylesheet" href="https://unpkg.com/open-props/durations.min.css">
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: var(--transition);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      line-height: 1.6;
+      background-image: 
+        linear-gradient(135deg, rgba(240,240,240,0.2) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(240,240,240,0.2) 25%, transparent 25%);
+      background-size: 40px 40px;
+    }
 
-    <style>
-      html, body {
-        margin: 0;
-        height: 100vh;
-        width: 100%;
-        background: #000;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: "Times New Roman", serif;
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      background-image: 
+        linear-gradient(135deg, rgba(40,40,40,0.3) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(40,40,40,0.3) 25%, transparent 25%);
+    }
+
+    .container {
+      max-width: 720px;
+      width: 90%;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .toggle-theme,
+    .toggle-music {
+      position: fixed;
+      top: 20px;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 1000;
+      color: var(--text-light);
+      background-color: rgba(0,0,0,0.1);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body.dark .toggle-theme,
+    body.dark .toggle-music {
+      color: var(--text-dark);
+      background-color: rgba(255,255,255,0.1);
+    }
+
+    .toggle-theme {
+      right: 20px;
+    }
+
+    .toggle-theme:hover {
+      transform: rotate(20deg);
+    }
+
+    .toggle-music {
+      left: 20px;
+    }
+
+    .toggle-music:hover {
+      transform: scale(1.1);
+    }
+
+    img.profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      border: 4px solid var(--accent);
+      box-shadow: 0 6px 16px var(--shadow);
+      transition: var(--transition);
+      loading: lazy;
+    }
+
+    img.profile-pic:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      margin: 0.5rem 0;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    h2 {
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+      color: var(--accent);
+    }
+
+    .bio {
+      font-weight: 300;
+      font-size: 1.05rem;
+      margin: 1.5rem auto;
+      opacity: 0.9;
+      max-width: 80%;
+      line-height: 1.7;
+    }
+
+    .section {
+      margin: var(--section-spacing) 0;
+    }
+
+    .contact {
+      margin: 1.8rem 0;
+    }
+
+    .contact p {
+      margin: 0.6rem 0;
+      font-weight: 300;
+      font-size: 1.05rem;
+    }
+
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-left: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+
+    .copy-btn:hover {
+      background-color: rgba(99, 102, 241, 0.1);
+    }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1.8rem 0;
+    }
+
+    .social a {
+      font-size: 1.5rem;
+      color: inherit;
+      transition: var(--transition);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none !important;
+    }
+
+    .social a:hover {
+      color: var(--accent);
+      background-color: rgba(99, 102, 241, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .tech-stack {
+      margin: 2.5rem 0;
+    }
+
+    .icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      font-size: 2.4rem;
+      margin-top: 1.5rem;
+    }
+
+    .icons i {
+      transition: var(--transition);
+    }
+
+    .icons i:hover {
+      transform: scale(1.2);
+      color: var(--accent);
+    }
+
+    .icons a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: center;
+      margin: 2rem 0;
+    }
+
+    .link-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.8rem 1.6rem;
+      border: 2px solid var(--text-light);
+      border-radius: 999px;
+      background-color: transparent;
+      color: var(--text-light);
+      font-weight: 500;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+
+    .pill-btn:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    body.dark .pill-btn {
+      border-color: var(--text-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark .pill-btn:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .footer {
+      margin-top: 3.5rem;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 2rem 1.5rem;
+      }
+      
+      .bio {
+        max-width: 100%;
+        font-size: 1rem;
+      }
+      
+      .icons {
+        gap: 1.2rem;
+        font-size: 2rem;
       }
 
-      /* typed a length for size interpolation */
-      @property --lines {
-        syntax: "<length>";
-        inherits: false;
-        initial-value: 0.00010px;
+      .pill-btn {
+        padding: 0.7rem 1.3rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .pill-btn {
+        padding: 0.6rem 1.1rem;
+        font-size: 0.9rem;
       }
 
-      /* ping/pong animation */
-      @keyframes liner {
-        50% {
-          --lines: 0.00012px;
-        }
+      .social a {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
       }
 
-      .noise {
-        animation: liner var(--hour, 10s) linear infinite;
-
-        /* repeating subpixel radial hard stop lines for mask */
-        -webkit-mask: repeating-radial-gradient(
-          circle at center,
-          #000,
-          var(--lines),
-          #000,
-          0,
-          #0000,
-          calc(var(--lines) * 2),
-          #0000 0
-        );
-        mask: repeating-radial-gradient(
-          circle at center,
-          #000,
-          var(--lines),
-          #000,
-          0,
-          #0000,
-          calc(var(--lines) * 2),
-          #0000 0
-        );
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      h1 {
+        font-size: 1.8rem;
       }
 
-      .noise h1 {
-        font-size: 45px;
-        font-weight: bold;
-        background-image: linear-gradient(to right, deeppink, blue);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-
-        /* light mode fallback */
-        @media (prefers-color-scheme: light) {
-          background-image: linear-gradient(to right, black, gray);
-        }
+      h2 {
+        font-size: 1.2rem;
       }
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-theme" onclick="toggleTheme()" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
 
-      .noise h1 span {
-        /* optional: can add different gradient or effect on punctuation */
-      }
-    </style>
-  </head>
-  <body>
-    <div class="noise">
-      <h1>hello<span>!</span></h1>
+  <button class="toggle-music" onclick="toggleMusic()" aria-label="Toggle background music">
+    <i class="fas fa-volume-up"></i>
+  </button>
+
+  <audio id="bg-music" loop>
+    <source src="susside.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+    <div class="container">
+        <img src="eren.jpeg" alt="Subash Baniya Profile Picture" class="profile-pic" />
+        <h1>
+            subashbaniyaa
+            <img 
+                src="https://img.icons8.com/color/48/verified-badge.png" 
+                alt="verified badge" 
+                width="25" 
+                height="25" 
+                style="vertical-align: middle; margin-left: 8px;"
+            />
+        </h1>
+        <p class="bio">Web Developer from Nepal — crafting minimal, user-first web experiences.</p>
+
+
+    <div class="contact">
+      <p>+977 9876543210</p>
+      <p>
+        <span id="email">forcodespace@gmail.com</span>
+        <button class="copy-btn" onclick="copyEmail()" aria-label="Copy email address">Copy</button>
+      </p>
     </div>
-  </body>
+
+    <div class="section">
+      <div class="social">
+        <a href="https://threads.net/" target="_blank" rel="noopener noreferrer" aria-label="Threads"><i class="fab fa-threads"></i></a>
+        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/subashbaniyaa" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:forcodespace@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+
+    
+
+    <div class="footer">
+      &copy; <span id="year"></span> subashbaniyaa. All rights reserved.
+    </div>
+  </div>
+
+  <script>
+    // Enhanced JavaScript with error handling
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set current year
+      document.getElementById('year').textContent = new Date().getFullYear();
+      
+      // Initialize theme
+      initTheme();
+      
+      // Initialize music
+      initMusic();
+    });
+
+    function copyEmail() {
+      const email = document.getElementById('email').textContent;
+      navigator.clipboard.writeText(email)
+        .then(() => {
+          const btn = document.querySelector('.copy-btn');
+          btn.textContent = 'Copied!';
+          setTimeout(() => {
+            btn.textContent = 'Copy';
+          }, 2000);
+        })
+        .catch(err => {
+          console.error('Failed to copy email: ', err);
+          alert('Failed to copy email. Please try again or copy manually.');
+        });
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme') || 
+                        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark');
+        document.querySelector('.toggle-theme i').className = 'fas fa-sun';
+      }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      const icon = document.querySelector('.toggle-theme i');
+      icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    const music = document.getElementById("bg-music");
+    const musicIcon = document.querySelector(".toggle-music i");
+
+    function initMusic() {
+      // Set initial state
+      music.volume = 0.3;
+      music.muted = false;
+      musicIcon.className = 'fas fa-volume-up';
+      
+      // Try to play music (will fail in most browsers due to autoplay policy)
+      const playPromise = music.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // Autoplay was prevented, show muted state
+          music.muted = true;
+          musicIcon.className = 'fas fa-volume-mute';
+          console.log("Autoplay prevented, waiting for user interaction");
+        });
+      }
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play()
+          .then(() => {
+            musicIcon.className = 'fas fa-volume-up';
+          })
+          .catch(error => {
+            console.log("Playback failed:", error);
+            // Show user they need to interact first
+            alert("Please click anywhere on the page first to enable audio");
+          });
+      } else {
+        music.pause();
+        musicIcon.className = 'fas fa-volume-mute';
+      }
+    }
+
+    // Enable audio after first user interaction
+    document.body.addEventListener('click', function enableAudio() {
+      document.body.removeEventListener('click', enableAudio);
+      
+      if (music.muted) {
+        music.muted = false;
+        musicIcon.className = 'fas fa-volume-up';
+        music.play().catch(e => console.log("Audio play failed:", e));
+      }
+    }, { once: true });
+  </script>
+</body>
 </html>
