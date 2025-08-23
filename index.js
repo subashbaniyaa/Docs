@@ -3,8 +3,12 @@ import cors from "cors";
 import path from 'path';
 import axios from 'axios';
 import express from 'express';
-import { fileURLToPath } from 'url';
-import { promises as fs } from 'fs';
+import {
+  fileURLToPath
+} from 'url';
+import {
+  promises as fs
+} from 'fs';
 import NepaliDate from 'nepali-date';
 import moment from 'moment-timezone';
 
@@ -68,13 +72,14 @@ app.get('/api', async (req, res) => {
     const quotes = await readJsonFile(filePath);
 
     if (!quotes || quotes.length === 0) {
-      return res.status(500).json({ error: 'No quotes found in database' });
+      return res.status(500).json({
+        error: 'No quotes found in database'
+      });
     }
 
     const randomQuote = getRandomElement(quotes);
 
-    const response = [
-      {
+    const response = [{
         quote: randomQuote.quote,
         character: randomQuote.character,
         anime: randomQuote.anime,
@@ -102,11 +107,13 @@ app.get('/api', async (req, res) => {
       },
     ];
 
-   res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(response, null, 2));
   } catch (error) {
     console.error('Error:', error.message);
-    res.status(500).json({ error: 'An error occurred, please try again!' });
+    res.status(500).json({
+      error: 'An error occurred, please try again!'
+    });
   }
 });
 
@@ -163,47 +170,51 @@ app.get('/api/imagine', async (req, res) => {
 });
 
 app.get("/api/chat", async (req, res) => {
-    const prompt = req.query.prompt;
+  const prompt = req.query.prompt;
 
-    if (!prompt) {
-        return res.status(400).json({ error: "The 'prompt' query parameter is required." });
-    }
+  if (!prompt) {
+    return res.status(400).json({
+      error: "The 'prompt' query parameter is required."
+    });
+  }
 
-    try {
-        const response = await axios.post(
-            "https://api.deepinfra.com/v1/openai/chat/completions",
-            {
-                model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-                messages: [
-                    {
-                        role: "system",
-                        content: `You are a friendly AI Assistant*, providing *short, human-like, and engaging* responses. Keep answers *concise and to the point* while being friendly and helpful.
+  try {
+    const response = await axios.post(
+      "https://api.deepinfra.com/v1/openai/chat/completions", {
+        model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+        messages: [{
+            role: "system",
+            content: `You are a friendly AI Assistant*, providing *short, human-like, and engaging* responses. Keep answers *concise and to the point* while being friendly and helpful.
 
                         - Stick to *related* topics only.  
                         - If a user asks *who you are*, reply: "I am an AI assistant designed to assist users effectively with their queries and tasks."
                         - **Be brief but informative**—avoid long explanations.  
                         - Use *simple, natural language* like a human conversation.
                         - Use clear, natural language, making responses feel like a human conversation.`
-                    },
-                    { role: "user", content: prompt }
-                ],
-                stream: false
-            },
-            {
-                headers: {
-                    "accept": "text/event-stream",
-                    "content-type": "application/json",
-                    "x-deepinfra-source": "web-embed",
-                    "Referer": "https://deepinfra.com/"
-                }
-            }
-        );
-      res.setHeader('Content-Type', 'text/plain');
-      res.send(JSON.stringify(response.data, null, 2));
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        stream: false
+      }, {
+        headers: {
+          "accept": "text/event-stream",
+          "content-type": "application/json",
+          "x-deepinfra-source": "web-embed",
+          "Referer": "https://deepinfra.com/"
+        }
+      }
+    );
+    res.setHeader('Content-Type', 'text/plain');
+    res.send(JSON.stringify(response.data, null, 2));
 
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+  } catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
 });
 
 
