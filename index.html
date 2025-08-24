@@ -16,7 +16,7 @@
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
       body {
-        background-color: #121212;
+        background-color: black;
         color: #f1f1f1;
         font-family: 'Poppins', sans-serif;
         display: flex;
@@ -41,7 +41,7 @@
         border-radius: 50%;
         object-fit: cover;
         margin-bottom: 1.5rem;
-        border: 4px solid #6366f1;
+        border: 2px solid #5C5CFF;
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s;
       }
@@ -58,6 +58,10 @@
         width: 25px;
         height: 25px;
       }
+
+      .quote, .quote * { user-select: text; }
+      h1, h1 * { user-select: none; }
+
       .quote {
         font-weight: 500;
         font-size: 1.3rem;
@@ -126,7 +130,13 @@
       .link-card:active i {
         opacity: 1;
       }
-
+      .ig-gradient {
+        background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        opacity: 1 !important;
+      }
       @media (max-width: 600px) {
         .container { width: 100%; padding: 10px; }
         img.profile-pic { width: 110px; height: 110px; }
@@ -136,13 +146,17 @@
         .link-info i { font-size: 1.3rem; }
         .link-text strong { font-size: 0.95rem; }
         .link-text span { font-size: 0.8rem; }
+        .fb-badge { width: 28px; height: 28px; font-size: 1rem; }
       }
     </style>
   </head>
   <body>
     <div class="container">
       <img src="/assets/eren.jpeg" alt="🖼️" class="profile-pic" />
-      <h1> subashbaniyaa <img src="https://img.icons8.com/color/48/verified-badge.png" alt="✅" /></h1>
+      <h1 id="name" oncontextmenu="return false">
+        subashbaniyaa
+        <img src="https://img.icons8.com/color/48/verified-badge.png" alt="✅" id="badge" oncontextmenu="return false" draggable="false" />
+      </h1>
       <div class="quote">
         <p id="quote">🌞</p>
         <p class="quote-author" id="author"></p>
@@ -151,10 +165,10 @@
       <div class="links">
         <a href="https://instagram.com/subashbaniyaa" target="_blank" class="link-card">
           <div class="link-info">
-            <i class="fab fa-instagram" style="color:#E4405F"></i>
+            <i class="fab fa-instagram ig-gradient" aria-hidden="true"></i>
             <div class="link-text"><strong>Instagram</strong><span>@subashbaniyaa</span></div>
           </div>
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
         </a>
         <a href="https://facebook.com/subashbaniyaa" target="_blank" class="link-card">
           <div class="link-info">
@@ -165,29 +179,38 @@
         </a>
         <a href="https://tiktok.com/@subashbaniyaa" target="_blank" class="link-card">
           <div class="link-info">
-            <i class="fab fa-tiktok"></i>
+            <i class="fab fa-tiktok" aria-hidden="true"></i>
             <div class="link-text"><strong>TikTok</strong><span>@subashbaniyaa</span></div>
           </div>
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
         </a>
         <a href="https://github.com/subashbaniyaa" target="_blank" class="link-card">
           <div class="link-info">
-            <i class="fab fa-github"></i>
+            <i class="fab fa-github" aria-hidden="true"></i>
             <div class="link-text"><strong>GitHub</strong><span>@subashbaniyaa</span></div>
           </div>
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
         </a>
         <a href="https://subash-baniya.com.np/api" target="_blank" class="link-card">
           <div class="link-info">
-            <i class="fas fa-globe" style="color:#34a853"></i>
+            <i class="fas fa-globe" style="color:#34a853" aria-hidden="true"></i>
             <div class="link-text"><strong>Docs</strong><span>subash-baniya.com.np/api</span></div>
           </div>
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
         </a>
       </div>
     </div>
 
     <script>
+      (function(){
+        const name = document.getElementById('name');
+        const badge = document.getElementById('badge');
+        [name, badge].forEach(el => {
+          el.addEventListener('contextmenu', e => e.preventDefault());
+          el.addEventListener('dragstart', e => e.preventDefault());
+        });
+      })();
+
       async function fetchQuote() {
         try {
           const res = await fetch('quotes_db.json');
@@ -205,6 +228,7 @@
           document.getElementById('quote').textContent = "Failed to load quote.";
         }
       }
+      
       fetchQuote();
     </script>
   </body>
