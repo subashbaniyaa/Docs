@@ -30,6 +30,10 @@ app.get('/', (req, res) => {
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
+app.get('/ai', (req, res) => {
+  res.sendFile(path.join(__dirname, 'ai.html'));
+});
+
 const readJsonFile = async (filePath) => {
   try {
     const data = await fs.readFile(filePath, 'utf8');

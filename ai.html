@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <svg class="sparkles-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+                    <path d="M20 3v4"/>
+                    <path d="M22 5h-4"/>
+                    <path d="M4 17v2"/>
+                    <path d="M5 18H3"/>
+                </svg>
+                <span>AI</span>
+            </div>
+            
+            <nav class="nav">
+                <a href="#" class="nav-link" data-tab="image">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="9" cy="9" r="2"/>
+                        <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                    </svg>
+                    Text To Image
+                </a>
+                <a href="#" class="nav-link" data-tab="chat">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    AI Chat
+                </a>
+                <a href="/api">API</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://github.com/subashbaniyaa" target="_blank" rel="noopener noreferrer" class="github-link">
+                    <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span class="github-text">GitHub</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Main Header -->
+            <div class="main-header">
+                <div class="main-title">
+                    <svg class="main-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+                        <path d="M20 3v4"/>
+                        <path d="M22 5h-4"/>
+                        <path d="M4 17v2"/>
+                        <path d="M5 18H3"/>
+                    </svg>
+                    <h1>AI</h1>
+                </div>
+                <p class="main-subtitle">Your all-in-one AI platform for image generation and intelligent conversations.</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <div class="tab-container">
+                    <button class="tab-btn active" data-tab="image">
+                        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="9" cy="9" r="2"/>
+                            <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                        </svg>
+                        Image Generator
+                    </button>
+                    <button class="tab-btn" data-tab="chat">
+                        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        AI Chat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Image Generator Section -->
+            <section id="imageSection" class="tab-content active">
+                <div class="generator-container">
+                    <!-- Title -->
+                    <div class="section-title">
+                        <div class="section-header">
+                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="9" cy="9" r="2"/>
+                                <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                            </svg>
+                            <h2>AI Image Generator</h2>
+                        </div>
+                        <p class="section-subtitle">Transform your ideas into stunning images with AI</p>
+                    </div>
+
+                    <!-- Input Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Create Your Image</h3>
+                        </div>
+                        <div class="card-content">
+                            <!-- CORS Information Alert -->
+                            <div class="cors-notice">
+                                <div class="cors-notice-content">
+                                    <svg class="cors-notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <path d="M12 16v-4"/>
+                                        <path d="M12 8h.01"/>
+                                    </svg>
+                                    <div class="cors-notice-text">
+                                        <p class="cors-notice-title">Browser Compatibility Notice</p>
+                                        <p class="cors-notice-desc">
+                                            Due to browser security restrictions (CORS), if direct image generation fails, 
+                                            the image will open in a new tab. You can then right-click and save it from there.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-section">
+                                <input 
+                                    type="text" 
+                                    id="promptInput" 
+                                    class="prompt-input" 
+                                    placeholder="Describe the image you want to generate..."
+                                >
+                                <button id="generateBtn" class="generate-btn">
+                                    <span class="btn-text">Generate</span>
+                                    <svg class="loading-spinner hidden" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" opacity="0.25"/>
+                                        <path fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4z" opacity="0.75"/>
+                                    </svg>
+                                </button>
+                                <button id="directLinkBtn" class="direct-link-btn hidden">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                        <polyline points="15,3 21,3 21,9"/>
+                                        <line x1="10" y1="14" x2="21" y2="3"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Suggested Prompts -->
+                            <div class="suggestions">
+                                <p class="suggestions-label">Try these prompts:</p>
+                                <div class="suggestions-grid" id="suggestedPrompts">
+                                    <!-- Suggestions will be populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Generated Image -->
+                    <div id="currentImageCard" class="card hidden">
+                        <div class="card-header">
+                            <h3>Generated Image</h3>
+                            <button id="downloadBtn" class="download-btn">
+                                <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7,10 12,15 17,10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Download
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div class="image-container">
+                                <img id="currentImage" class="generated-image" alt="Generated image">
+                            </div>
+                            <div class="prompt-display">
+                                <p><strong>Prompt:</strong> <span id="currentPrompt"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image History -->
+                    <div id="historyCard" class="card hidden">
+                        <div class="card-header">
+                            <h3>Recent Images</h3>
+                        </div>
+                        <div class="card-content">
+                            <div id="historyGrid" class="history-grid">
+                                <!-- History items will be populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chat Section -->
+            <section id="chatSection" class="tab-content">
+                <div class="chat-container">
+                    <!-- Title -->
+                    <div class="section-title">
+                        <div class="section-header">
+                            <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            <h2>AI Chat Assistant</h2>
+                        </div>
+                        <p class="section-subtitle">Have a conversation with our AI assistant</p>
+                    </div>
+
+                    <!-- Chat Interface -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Chat</h3>
+                            <button id="clearChatBtn" class="clear-chat-btn hidden">Clear Chat</button>
+                        </div>
+                        <div class="card-content">
+                            <!-- Chat Messages -->
+                            <div id="chatMessages" class="chat-messages">
+                                <div id="emptyChatState" class="empty-chat-state">
+                                    <svg class="empty-chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                    <div class="empty-chat-text">
+                                        <h3>Start a conversation</h3>
+                                        <p>Ask me anything or try one of the suggestions below</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chat Input Section -->
+                            <div class="chat-input-section">
+                                <input 
+                                    type="text" 
+                                    id="chatInput" 
+                                    class="chat-input" 
+                                    placeholder="Type your message..."
+                                >
+                                <button id="sendBtn" class="send-btn">
+                                    <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="22" y1="2" x2="11" y2="13"/>
+                                        <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                                    </svg>
+                                    <svg class="chat-loading-spinner hidden" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" opacity="0.25"/>
+                                        <path fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4z" opacity="0.75"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Suggested Questions -->
+                            <div id="suggestedQuestions" class="suggested-questions">
+                                <p class="suggestions-label">Try asking:</p>
+                                <div class="suggestions-grid" id="chatSuggestions">
+                                    <!-- Chat suggestions will be populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+            <div class="footer-bottom">
+                <p>All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
