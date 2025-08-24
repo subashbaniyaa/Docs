@@ -9,17 +9,12 @@
     <meta property="og:description" content="Docs" />
     <meta property="og:image" content="https://i.ibb.co/z1kgF6W/481849257-2943868939253544-8815298265069237979-n.jpg" />
     <meta property="og:url" content="https://subash-baniya.com.np/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://i.imgur.com/9GGNGm1.jpeg" type="image/png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        user-select: none;
-      }
-
+      * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
       body {
         background-color: #121212;
         color: #f1f1f1;
@@ -31,28 +26,15 @@
         min-height: 100vh;
         line-height: 1.6;
         padding: 20px;
-        overflow: hidden;
       }
-
-      img,
-      a,
-      h1,
-      p,
-      div {
-        -webkit-user-drag: none;
-        pointer-events: auto;
-      }
-
       .container {
         max-width: 720px;
-        width: 90%;
+        width: 100%;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
       }
-
       img.profile-pic {
         width: 140px;
         height: 140px;
@@ -62,13 +44,8 @@
         border: 4px solid #6366f1;
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s;
-        pointer-events: none;
       }
-
-      img.profile-pic:hover {
-        transform: scale(1.05);
-      }
-
+      img.profile-pic:hover { transform: scale(1.05); }
       h1 {
         font-weight: 700;
         font-size: 1.5rem;
@@ -76,16 +53,11 @@
         align-items: center;
         justify-content: center;
       }
-
       h1 img {
         margin-left: 8px;
         width: 25px;
         height: 25px;
-        vertical-align: middle;
-        pointer-events: none;
-        -webkit-user-drag: none;
       }
-
       .quote {
         font-weight: 500;
         font-size: 1.3rem;
@@ -94,74 +66,127 @@
         max-width: 85%;
         line-height: 1.5;
       }
-
       .quote-author {
         font-weight: 500;
         font-size: 0.9rem;
         margin-top: 0.5rem;
       }
-
-      .social {
+      .links {
+        margin-top: 1.5rem;
         display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 0.8rem;
-        margin: 1.8rem 0;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
       }
-
-      .social a {
-        font-size: 1rem;
-        width: 32px;
-        height: 32px;
+      .link-card {
         display: flex;
         align-items: center;
-        justify-content: center;
-        color: inherit;
-        border-radius: 50%;
-        text-decoration: none !important;
+        justify-content: space-between;
+        padding: 14px 16px;
+        background: #1a1a1a;
+        border-radius: 14px;
         transition: 0.3s;
+        text-decoration: none;
+        color: #fff;
       }
-
-      .social a:hover {
-        color: red;
+      .link-card:hover {
+        background: #292929;
         transform: translateY(-2px);
+      }
+      .link-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .link-info i {
+        font-size: 1.5rem;
+        opacity: 0.6;
+        transition: opacity 0.3s;
+      }
+      .link-card:hover i,
+      .link-card:active i { 
+        opacity: 1;
+      }
+      .link-text { text-align: left; }
+      .link-text strong {
+        display: block;
+        font-size: 1rem;
+      }
+      .link-text span {
+        font-size: 0.80rem;
+        opacity: 0.8;
+      }
+      .link-info i,
+      .link-card > i {
+        font-size: 1rem;
+        opacity: 0.6;
+        transition: opacity 0.3s;
+      }
+      .link-card:hover i,
+      .link-card:active i {
+        opacity: 1;
       }
 
       @media (max-width: 600px) {
-        .quote {
-          font-size: 1rem;
-        }
-
-        .social a {
-          width: 28px;
-          height: 28px;
-          font-size: 0.9rem;
-        }
-
-        h1 {
-          font-size: 1.6rem;
-        }
+        .container { width: 100%; padding: 10px; }
+        img.profile-pic { width: 110px; height: 110px; }
+        h1 { font-size: 1.2rem; }
+        .quote { font-size: 1rem; }
+        .link-card { padding: 12px; border-radius: 10px; }
+        .link-info i { font-size: 1.3rem; }
+        .link-text strong { font-size: 0.95rem; }
+        .link-text span { font-size: 0.8rem; }
       }
     </style>
-    <script>
-      document.addEventListener('contextmenu', (e) => e.preventDefault());
-    </script>
   </head>
   <body>
     <div class="container">
       <img src="/assets/eren.jpeg" alt="🖼️" class="profile-pic" />
-      <h1> subashbaniyaa <img src="https://img.icons8.com/color/48/verified-badge.png" alt="verified badge" />
-      </h1>
+      <h1> subashbaniyaa <img src="https://img.icons8.com/color/48/verified-badge.png" alt="✅" /></h1>
       <div class="quote">
         <p id="quote">🌞</p>
         <p class="quote-author" id="author"></p>
       </div>
-      <div class="social">
-        <a href="/api" target="_blank" rel="noopener noreferrer" aria-label="Docs">
+
+      <div class="links">
+        <a href="https://instagram.com/subashbaniyaa" target="_blank" class="link-card">
+          <div class="link-info">
+            <i class="fab fa-instagram" style="color:#E4405F"></i>
+            <div class="link-text"><strong>Instagram</strong><span>@subashbaniyaa</span></div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+        <a href="https://facebook.com/subashbaniyaa" target="_blank" class="link-card">
+          <div class="link-info">
+            <i class="fab fa-facebook" style="color:#1877F2"></i>
+            <div class="link-text"><strong>Facebook</strong><span>@subashbaniyaa</span></div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+        <a href="https://tiktok.com/@subashbaniyaa" target="_blank" class="link-card">
+          <div class="link-info">
+            <i class="fab fa-tiktok"></i>
+            <div class="link-text"><strong>TikTok</strong><span>@subashbaniyaa</span></div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+        <a href="https://github.com/subashbaniyaa" target="_blank" class="link-card">
+          <div class="link-info">
+            <i class="fab fa-github"></i>
+            <div class="link-text"><strong>GitHub</strong><span>@subashbaniyaa</span></div>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+        <a href="https://subash-baniya.com.np/api" target="_blank" class="link-card">
+          <div class="link-info">
+            <i class="fas fa-globe" style="color:#34a853"></i>
+            <div class="link-text"><strong>Docs</strong><span>subash-baniya.com.np/api</span></div>
+          </div>
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
         </a>
       </div>
     </div>
+
     <script>
       async function fetchQuote() {
         try {
