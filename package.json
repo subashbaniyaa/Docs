@@ -1,7 +1,7 @@
 {
-  "name": "subashbaniya.info.np",
-  "version": "1.2.3",
-  "description": "Personal website",
+  "name": "subash-baniya.com.np",
+  "version": "5",
+  "description": "Docs",
   "type": "module",
   "main": "index.js",
   "scripts": {
