@@ -1,6 +1,3 @@
-// Pure JavaScript AI Hub Application
-// No framework dependencies - just vanilla HTML, CSS, and JavaScript
-
 // Application State
 let state = {
     activeTab: 'image',
@@ -328,7 +325,7 @@ async function generateImage() {
 
         // Method 1: Direct API call
         try {
-            const apiUrl = `https://subash-baniya.com.np/api/imagine?prompt=${encodeURIComponent(prompt)}`;
+            const apiUrl = `/api/imagine?prompt=${encodeURIComponent(prompt)}`;
             const response = await fetch(apiUrl, {
                 method: 'GET',
                 mode: 'cors'
@@ -345,7 +342,7 @@ async function generateImage() {
 
             // Method 2: CORS proxy
             try {
-                const proxyUrl = `https://cors-anywhere.herokuapp.com/https://subash-baniya.com.np/api/imagine?prompt=${encodeURIComponent(prompt)}`;
+                const proxyUrl = `/api/imagine?prompt=${encodeURIComponent(prompt)}`;
                 const response = await fetch(proxyUrl);
 
                 if (!response.ok) {
@@ -359,7 +356,7 @@ async function generateImage() {
 
                 // Method 3: Alternative CORS proxy
                 try {
-                    const altProxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://subash-baniya.com.np/api/imagine?prompt=${encodeURIComponent(prompt)}`)}`;
+                    const altProxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`/api/imagine?prompt=${encodeURIComponent(prompt)}`)}`;
                     const response = await fetch(altProxyUrl);
 
                     if (!response.ok) {
@@ -372,7 +369,7 @@ async function generateImage() {
                     console.log('Alternative proxy failed, trying final method...', altProxyError);
 
                     // Method 4: Open in new window as fallback
-                    const directUrl = `https://subash-baniya.com.np/api/imagine?prompt=${encodeURIComponent(prompt)}`;
+                    const directUrl = `/api/imagine?prompt=${encodeURIComponent(prompt)}`;
 
                     showToast(
                         'CORS restriction detected. Opening image in new tab. You can right-click and save the image from there.',
@@ -685,7 +682,7 @@ async function sendMessage() {
 
         // Method 1: Direct API call
         try {
-            const apiUrl = `https://www.subash-baniya.com.np/api/chat?prompt=${encodeURIComponent(currentMessage)}`;
+            const apiUrl = `/api/chat?prompt=${encodeURIComponent(currentMessage)}`;
             response = await fetch(apiUrl, {
                 method: 'GET',
                 mode: 'cors'
@@ -699,7 +696,7 @@ async function sendMessage() {
 
             // Method 2: CORS proxy
             try {
-                const proxyUrl = `https://cors-anywhere.herokuapp.com/https://www.subash-baniya.com.np/api/chat?prompt=${encodeURIComponent(currentMessage)}`;
+                const proxyUrl = `/api/chat?prompt=${encodeURIComponent(currentMessage)}`;
                 response = await fetch(proxyUrl);
 
                 if (!response.ok) {
@@ -710,7 +707,7 @@ async function sendMessage() {
 
                 // Method 3: Alternative CORS proxy
                 try {
-                    const altProxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://www.subash-baniya.com.np/api/chat?prompt=${encodeURIComponent(currentMessage)}`)}`;
+                    const altProxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`/api/chat?prompt=${encodeURIComponent(currentMessage)}`)}`;
                     const altResponse = await fetch(altProxyUrl);
 
                     if (!altResponse.ok) {
@@ -813,57 +810,74 @@ function setChatSendingState(isSending) {
     }
 }
 
-// Update chat display
-function updateChatDisplay() {
-    if (!elements.chatMessages || !elements.emptyChatState) return;
+    // Update chat display
+    function updateChatDisplay() {
+        if (!elements.chatMessages || !elements.emptyChatState) return;
 
-    if (state.chatHistory.length === 0) {
-        elements.emptyChatState.style.display = 'flex';
-        if (elements.clearChatBtn) elements.clearChatBtn.classList.add('hidden');
-        if (elements.suggestedQuestions) elements.suggestedQuestions.classList.remove('hidden');
-        elements.chatMessages.innerHTML = '';
-        elements.chatMessages.appendChild(elements.emptyChatState);
-        return;
-    }
+        const { chatMessages, emptyChatState, clearChatBtn, suggestedQuestions } = elements;
+        const { chatHistory } = state;
 
-    elements.emptyChatState.style.display = 'none';
-    if (elements.clearChatBtn) elements.clearChatBtn.classList.remove('hidden');
-    if (elements.suggestedQuestions) elements.suggestedQuestions.classList.add('hidden');
-    elements.chatMessages.innerHTML = '';
+        // Empty chat state
+        if (chatHistory.length === 0) {
+            emptyChatState.style.display = "flex";
+            if (clearChatBtn) clearChatBtn.classList.add("hidden");
+            if (suggestedQuestions) suggestedQuestions.classList.remove("hidden");
 
-    state.chatHistory.forEach(message => {
-        const messageEl = document.createElement('div');
-        messageEl.className = `chat-message ${message.role}`;
+            chatMessages.innerHTML = "";
+            chatMessages.appendChild(emptyChatState);
+            return;
+        }
 
-        const avatarIcon = message.role === 'user' 
-            ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
-            : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>';
+        // Populated chat state
+        emptyChatState.style.display = "none";
+        if (clearChatBtn) clearChatBtn.classList.remove("hidden");
+        if (suggestedQuestions) suggestedQuestions.classList.add("hidden");
 
-        messageEl.innerHTML = `
-            <div class="chat-message-content">
-                <div class="chat-avatar ${message.role}">
-                    ${avatarIcon}
-                </div>
-                <div class="chat-message-wrapper">
-                    <div class="chat-bubble ${message.role}">
-                        ${message.content}
+        chatMessages.innerHTML = "";
+
+        chatHistory.forEach(({ role, content, timestamp }) => {
+            const messageEl = document.createElement("div");
+            messageEl.className = `chat-message ${role}`;
+
+            const avatarIcon =
+                role === "user"
+                    ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                         <circle cx="12" cy="7" r="4"/>
+                       </svg>`
+                    : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                         <path d="M12 8V4H8"/>
+                         <rect width="16" height="12" x="4" y="8" rx="2"/>
+                         <path d="M2 14h2"/>
+                         <path d="M20 14h2"/>
+                         <path d="M15 13v2"/>
+                         <path d="M9 13v2"/>
+                       </svg>`;
+
+            // Escape quotes safely for inline copy button
+            const safeContent = content.replace(/'/g, "\\'");
+
+            messageEl.innerHTML = `
+                <div class="chat-message-content">
+                    <div class="chat-avatar ${role}">${avatarIcon}</div>
+                    <div class="chat-message-wrapper">
+                        <div class="chat-bubble ${role}">${content}</div>
+                        <div class="chat-message-meta">
+                            <span>${new Date(timestamp).toLocaleTimeString()}</span>
+                            <button class="copy-message-btn" onclick="copyMessage('${safeContent}')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="chat-message-meta">
-                        <span>${message.timestamp.toLocaleTimeString()}</span>
-                        <button class="copy-message-btn" onclick="copyMessage('${message.content.replace(/'/g, "\\'")}')">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                            </svg>
-                        </button>
-                    </div>
                 </div>
-            </div>
-        `;
+            `;
 
-        elements.chatMessages.appendChild(messageEl);
-    });
-
+            chatMessages.appendChild(messageEl);
+        });
+    
     // Scroll to bottom
     elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
 }
