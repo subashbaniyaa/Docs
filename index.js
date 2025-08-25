@@ -22,17 +22,19 @@ const serverStartTime = new Date();
 app.use(express.json());
 app.use(cors());
 
-app.use(express.static(__dirname));
+// Serve only from /public
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get('/ai', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ai.html'));
+  res.sendFile(path.join(__dirname, 'public', 'ai.html'));
 });
+
 
 const readJsonFile = async (filePath) => {
   try {
@@ -223,8 +225,24 @@ app.get("/api/chat", async (req, res) => {
 
 
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, '404.html'));
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
+
+app.use((req, res, next) => {
+  const blocked = [
+    '/index.js',
+    '/server.js',
+    '/.env',
+    '/package.json',
+    '/package-lock.json',
+    '/node_modules',
+  ];
+  if (blocked.some(f => req.url.startsWith(f))) {
+    return res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+  }
+  next();
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
