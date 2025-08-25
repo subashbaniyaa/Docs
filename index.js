@@ -3,14 +3,11 @@ import cors from "cors";
 import path from 'path';
 import axios from 'axios';
 import express from 'express';
-import {
-  fileURLToPath
-} from 'url';
-import {
-  promises as fs
-} from 'fs';
+import { fileURLToPath } from 'url';
+import { promises as fs } from 'fs';
 import NepaliDate from 'nepali-date';
 import moment from 'moment-timezone';
+import morgan from 'morgan';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,9 +17,13 @@ const PORT = process.env.PORT || 3000;
 const serverStartTime = new Date();
 
 app.use(express.json());
-app.use(cors());
 
-// Serve only from /public
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGINS?.split(",") || "*"
+}));
+
+app.use(morgan('dev'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
@@ -35,14 +36,13 @@ app.get('/ai', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'ai.html'));
 });
 
-
 const readJsonFile = async (filePath) => {
   try {
     const data = await fs.readFile(filePath, 'utf8');
     return JSON.parse(data);
   } catch (err) {
     console.error('Error reading JSON file:', err.message);
-    throw new Error('Error reading JSON file');
+    return [];
   }
 };
 
@@ -50,19 +50,6 @@ const getRandomElement = (array) => {
   const randomIndex = Math.floor(Math.random() * array.length);
   return array[randomIndex];
 };
-
-const sendPrettyJson = (res, data) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify(data, null, 2));
-};
-
-app.use((req, res, next) => {
-  const blockedFiles = ['/index.js'];
-  if (blockedFiles.some(file => req.url.startsWith(file))) {
-    return res.status(404).sendFile(path.join(__dirname, '404.html'));
-  }
-  next();
-});
 
 app.get('/api', async (req, res) => {
   try {
@@ -78,14 +65,13 @@ app.get('/api', async (req, res) => {
     const quotes = await readJsonFile(filePath);
 
     if (!quotes || quotes.length === 0) {
-      return res.status(500).json({
-        error: 'No quotes found in database'
-      });
+      return res.status(500).json({ error: 'No quotes found in database' });
     }
 
     const randomQuote = getRandomElement(quotes);
 
-    const response = [{
+    const response = [
+      {
         quote: randomQuote.quote,
         character: randomQuote.character,
         anime: randomQuote.anime,
@@ -113,17 +99,18 @@ app.get('/api', async (req, res) => {
       },
     ];
 
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(response, null, 2));
+    res.json(response);
   } catch (error) {
     console.error('Error:', error.message);
     res.status(500).json({
-      error: 'An error occurred, please try again!'
+      error: process.env.NODE_ENV === "development"
+        ? error.message
+        : "Internal Server Error"
     });
   }
 });
 
-
+// ✅ Improved bad words check
 const badWords = ["subash", "baniya"];
 
 app.get('/api/imagine', async (req, res) => {
@@ -133,8 +120,10 @@ app.get('/api/imagine', async (req, res) => {
     return res.status(400).send("Please provide a prompt.");
   }
 
-  const words = prompt.split(/[\s,]+/);
-  const bannedWord = words.find(word => badWords.includes(word.toLowerCase()));
+  const bannedWord = badWords.find(bw =>
+    new RegExp(`\\b${bw}\\b`, "i").test(prompt)
+  );
+
   if (bannedWord) {
     return res.status(400).send(`Sorry, but you are not allowed to use the word "${bannedWord}".`);
   }
@@ -151,27 +140,25 @@ app.get('/api/imagine', async (req, res) => {
       prompt: prompt,
       negative_prompt: ',malformed hands,malformed fingers,malformed faces,malformed body parts,mutated body parts,malfromed eyes,mutated fingers,mutated hands,realistic,worst quality, low quality, blurry, pixelated, extra limb, extra fingers, bad hand, text, name, letters, out of frame, lowres, text, error, cropped, jpeg artifacts, ugly, duplicate, morbid, mutilated, out of frame, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, username,',
       aspect_ratio: '3x3',
-      num_outputs: '',
-      num_inference_steps: '',
       controlnet_conditioning_scale: 0.5,
       guidance_scale: '5.5',
-      scheduler: '',
-      seed: ''
     })
   };
 
   try {
     const response = await axios(options);
     const imageData = response.data.image_base64;
-
     const imageBuffer = Buffer.from(imageData, 'base64');
 
     res.set('Content-Type', 'image/jpeg');
     res.send(imageBuffer);
-
   } catch (error) {
     console.error(error);
-    res.status(500).send("Failed to generate the image. Please try again later.");
+    res.status(500).json({
+      error: process.env.NODE_ENV === "development"
+        ? error.message
+        : "Failed to generate the image. Please try again later."
+    });
   }
 });
 
@@ -186,46 +173,36 @@ app.get("/api/chat", async (req, res) => {
 
   try {
     const response = await axios.post(
-      "https://api.deepinfra.com/v1/openai/chat/completions", {
+      "https://api.deepinfra.com/v1/openai/chat/completions",
+      {
         model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-        messages: [{
-            role: "system",
-            content: `You are a friendly AI Assistant*, providing *short, human-like, and engaging* responses. Keep answers *concise and to the point* while being friendly and helpful.
-
-                        - Stick to *related* topics only.  
-                        - If a user asks *who you are*, reply: "I am an AI assistant designed to assist users effectively with their queries and tasks."
-                        - **Be brief but informative**—avoid long explanations.  
-                        - Use *simple, natural language* like a human conversation.
-                        - Use clear, natural language, making responses feel like a human conversation.`
-          },
+        messages: [
           {
-            role: "user",
-            content: prompt
-          }
+            role: "system",
+            content: `You are a friendly AI Assistant, providing short, human-like, and engaging responses.`
+          },
+          { role: "user", content: prompt }
         ],
         stream: false
-      }, {
+      },
+      {
         headers: {
-          "accept": "text/event-stream",
+          "accept": "application/json",
           "content-type": "application/json",
           "x-deepinfra-source": "web-embed",
           "Referer": "https://deepinfra.com/"
         }
       }
     );
-    res.setHeader('Content-Type', 'text/plain');
-    res.send(JSON.stringify(response.data, null, 2));
 
+    res.json(response.data);
   } catch (error) {
     res.status(500).json({
-      error: error.message
+      error: process.env.NODE_ENV === "development"
+        ? error.message
+        : "Chat request failed"
     });
   }
-});
-
-
-app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 app.use((req, res, next) => {
@@ -237,13 +214,28 @@ app.use((req, res, next) => {
     '/package-lock.json',
     '/node_modules',
   ];
+
   if (blocked.some(f => req.url.startsWith(f))) {
-    return res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+    return res.status(404).sendFile(
+      path.join(__dirname, 'public', '404.html'),
+      (err) => {
+        if (err) res.status(404).send("404 - Not Found");
+      }
+    );
   }
+
   next();
 });
 
+app.use((req, res) => {
+  res.status(404).sendFile(
+    path.join(__dirname, 'public', '404.html'),
+    (err) => {
+      if (err) res.status(404).send("404 - Not Found");
+    }
+  );
+});
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });
