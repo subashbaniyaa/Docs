@@ -14,11 +14,11 @@ let state = {
 
 // Suggested prompts for image generation
 const suggestedPrompts = [
-    "A serene mountain landscape at sunset",
-    "Futuristic city skyline with flying cars",
-    "Magical forest with glowing mushrooms",
-    "Abstract art with vibrant colors",
-    "Cute cartoon cat wearing sunglasses"
+    "View from a Bangalore flyover at night, headlights and taillights streaking below, distant city towers faintly glowing in haze, realistic cinematic tone",
+    "green dress anime girl warrior perfect beuty",
+    "wall art for men using a lion with scripture ",
+    "Sunset over the ocean",
+    "Japanese female high school student walking in Shibuya"
 ];
 
 // Suggested questions for chat
