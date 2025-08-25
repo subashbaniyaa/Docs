@@ -110,7 +110,6 @@ app.get('/api', async (req, res) => {
   }
 });
 
-// ✅ Improved bad words check
 const badWords = ["subash", "baniya"];
 
 app.get('/api/imagine', async (req, res) => {
