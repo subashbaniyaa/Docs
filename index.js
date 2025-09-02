@@ -61,7 +61,7 @@ app.get('/api', async (req, res) => {
     const nepaliDateInstance = new NepaliDate(kathmanduDate);
     const bsDateStr = nepaliDateInstance.format('dddd, MMMM DD, YYYY');
 
-    const filePath = path.join(__dirname, 'quotes_db.json');
+    const filePath = path.join(__dirname, 'public', 'quotes_db.json');
     const quotes = await readJsonFile(filePath);
 
     if (!quotes || quotes.length === 0) {
